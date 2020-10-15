@@ -1,0 +1,16 @@
+<!--pages/user/index.wxml-->
+<view class="wrap">
+    <view class="base-info-wrap">
+      <view class='header'>
+        <open-data type="userAvatarUrl" class='header-img'></open-data>
+     </view>
+        <open-data type="userNickName"></open-data>
+    </view>
+
+    <view class='content-wrap'>
+          <cell 
+            title='我的设备'
+            isLink
+          />
+    </view>
+</view>

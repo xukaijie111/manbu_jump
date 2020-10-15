@@ -1,0 +1,61 @@
+/* pages/device-list/index.wxss */
+
+.wrap{
+  padding: 30rpx 30rpx;
+  box-sizing: border-box
+}
+.item-wrap{
+    width: 100%;
+    height: 200rpx;
+  
+    color: #ffffff;
+    position: relative;
+   
+}
+
+.content{
+  background-color: rgba(0,0,0,0.3);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0rpx 30rpx;
+  box-sizing: border-box;
+}
+
+ .sport-img{
+        position: absolute;
+        width:100%;
+        height:100%;
+        z-index: -1;
+}
+
+.status-wrap{
+  width: 120rpx;
+  height: 50rpx;
+  border-radius: 1000rpx;
+  background: #007947;
+  display: flex;
+  align-items: center;
+  justify-content: center
+}
+
+.jump-img{
+  width: 80rpx;
+  height: 80rpx;
+  margin-right: 20rpx;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.jump-img-content {
+  width: 100%;
+  height: 100%;
+}
+
+.left{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

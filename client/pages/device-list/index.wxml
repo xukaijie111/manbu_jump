@@ -1,0 +1,17 @@
+<!--pages/device-list/index.wxml-->
+<view class='wrap'>
+  <view wx:for='{{lists}}' class='item-wrap'>
+  <image src='/images/sport.png' class="sport-img" mode='aspectFill'></image>
+    <view class="content">
+
+        <view class='left'>
+          <view class='jump-img'>
+              <open-data type="userAvatarUrl" class='jump-img-content'></open-data>
+          </view>
+          <view>123</view>
+          </view>
+
+        <view class='status-wrap'>已绑定</view>
+    </view>
+  </view>
+</view>

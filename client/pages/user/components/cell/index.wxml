@@ -1,0 +1,9 @@
+<!--pages/user/components/cell/index.wxml-->
+<view class="wrap {{isLink?'link':''}}" hover-class="hover">
+    <view class="left">{{title}}</view>
+
+    <view class="right">
+      <view>{{text}}</view>
+        <image wx:if='{{isLink}}' src='/images/arrow.png' class='arrow'></image>
+    </view>
+</view>
