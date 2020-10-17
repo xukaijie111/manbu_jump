@@ -1,7 +1,8 @@
 {
   "pages": [
+            "pages/device-list/index",
         "pages/index/index",
-        "pages/device-list/index",
+
     "pages/user/index",
 
     "pages/logs/logs"

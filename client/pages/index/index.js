@@ -11,49 +11,6 @@ Page({
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
-  discoveryBLE(){
-    wx.getBluetoothDevices({
-      success:(res)=>{
-        console.log('####find device is ',res.devices)
-      }
-    })
-  },
-
-  findBLE:function(){
-    wx.startBluetoothDevicesDiscovery({
-      success: (res)=> {
-        wx.showLoading({
-           title: '正在搜索设备',
-           mask:true
-         })
-
-         const timer = setInterval(()=>{
-           this.discoveryBLE()
-         },1000)
-
-         setTimeout(()=>{
-           clearInterval(timer)
-           wx.hideLoading()
-         },5*1000)
-
-      },
-    })
-  },
-  initBLE: function () {
-    wx.openBluetoothAdapter({
-      success: (res) => {
-        console.log('打开蓝牙适配成功',res)
-        this.findBLE();
-      },
-      fail:(err)=>{
-        wx.showToast({
-          title: '请打开蓝牙',
-          icon:'none'
-        })
-      }
-    })
-  },
-
   //事件处理函数
   bindViewTap: function() {
     wx.navigateTo({
