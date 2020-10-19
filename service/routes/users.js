@@ -4,10 +4,9 @@ var router = express.Router();
 var axios = require('axios');
 
 var Util = require('../util/util')
-
-import {
-  userModel, deviceModel 
-} from '../db/db'
+var {
+  userModel
+} = require('../db/db')
 
 var creatingUser = {};
 
@@ -70,7 +69,7 @@ router.post('/login',async (req,res,next)=>{
     console.log('####res is ',ret,typeof ret)
     const data = ret.data;
     const session_key = data.session_key;
-    const open_id = data.open_id;
+    const open_id = data.openid;
     userModel.findOne({openId:open_id})
     .select("-_id")
     .exec((err,value)=>{
@@ -95,53 +94,6 @@ router.post('/save_info',(req,res,next)=>{
 
   userModel.updateOne({userId:body.userId},{userInfo:body.userInfo})
   res.json({code:0})
-})
-
-router.post('/bind_device',(req,res,next)=>{
-    var body = req.body;
-    var id = body.id;
-
-    var userId = body.userId;
-    if (!id || !userId) {
-      return res.json({code:-1,message:'参数错误'})
-    }
-
-    deviceModel.findOne({id},(err,value)=>{
-        if (value && !value.isDelete && value.userId) {
-          return res.json({code:-1,message:'该设备已经绑定'})
-        }
-
-        deviceModel.updateOne({id},{userId,isDelete:false},(err)=>{
-          if (err) {
-            return res.json({err:-1,message:'数据库错误'})
-          }
-
-          res.json({code:0})
-        })
-    })
-})
-
-router.post('/unbind_device',(req,res,next)=>{
-    var body = req.body;
-    var id = body.id;
-
-    var userId = body.userId;
-    if (!id || !userId) {
-      return res.json({code:-1,message:'参数错误'})
-    }
-    deviceModel.findOne({id},(err,value) => {
-      if (err) {
-        return res.json({err:-1,message:'数据库错误'})
-      }
-
-      deviceModel.updateOne({id},{isDelete:true},(err)=>{
-        if (err) {
-          return res.json({err:-1,message:'数据库错误'})
-        }
-        res.json({code:0})
-      })
-
-    })
 })
 
 

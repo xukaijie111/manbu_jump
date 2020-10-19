@@ -1,5 +1,9 @@
 // pages/device-list/index.js
-import  { BATTER_SERVICE } from '../../utils/const.js'
+import { BATTER_SERVICE, HUMAN_INERFACE_DEVICE_SERVICE,
+  SCAN_PARAMETERS
+ } from '../../utils/const.js'
+
+ import API from '../../request/api.js'
 
 Page({
 
@@ -7,7 +11,28 @@ Page({
    * 页面的初始数据
    */
   data: {
-    lists:[]
+    lists:[{
+      name:'jump s1'
+    },{
+      name:'jump s2'
+    }]
+  },
+
+  getdeviceList(){
+    API.getMyDeviceList()
+    .then((res)=>{
+      console.log('##3get device list is ',res)
+    })
+  },
+
+  writeDataToBle(){
+    wx.writeBLECharacteristicValue({
+      deviceId: '',
+      serviceId: '',
+      characteristicId: '',
+      value: [],
+      success: function(res) {},
+    })
   },
    ab2hex(buffer) {
     let hexArr = Array.prototype.map.call(
@@ -31,18 +56,53 @@ Page({
       deviceId: deviceId,
 
       success:  (res) => {
-          console.log('connect res is ',res)
-        wx.readBLECharacteristicValue({
-          deviceId,
-          serviceId:BATTER_SERVICE.uuid,
-          characteristicId: BATTER_SERVICE.battery_character_uuid,
-          success:(res)=>{
-            console.log('####read battery ok ')
-            wx.onBLECharacteristicValueChange((res)=>{
-              console.log('####resad battery is ', this.ab2hex(res.value)) //0x0c
-            })
-          }
-        })
+
+        // wx.getBLEDeviceCharacteristics({
+        //   deviceId,
+        //   serviceId: SCAN_PARAMETERS.uuid,
+        //   success: function(res) {
+        //     console.log('####get charater is ',res)
+        //   },
+        // })
+        console.log('连接成功')
+        let buffer = new ArrayBuffer(5)
+        let dataView = new DataView(buffer)
+        dataView.setUint8(0, 243); // 0xf3
+        dataView.setUint8(1, 0);
+        dataView.setUint8(2, 0);
+        dataView.setUint8(3, 0);
+        dataView.setUint8(4, 0);
+          wx.writeBLECharacteristicValue({
+            deviceId,
+            serviceId: SCAN_PARAMETERS.uuid,
+            characteristicId: SCAN_PARAMETERS.scan_interface_window,
+            value: buffer,
+            success: function(res) {
+              console.log('####write value is ',res)
+            },
+            fail:(err)=>{
+              console.log('###writ err is ',err)
+            }
+          })
+        // wx.getBLEDeviceCharacteristics({
+        //   deviceId,
+        //   serviceId: HUMAN_INERFACE_DEVICE_SERVICE.uuid,
+        //   success: function(res) {
+        //     console.log('###get all chareater is ',res)
+        //   },
+        // })
+        //   console.log('connect res is ',res)
+        // wx.readBLECharacteristicValue({
+        //   deviceId,
+        //   serviceId:BATTER_SERVICE.uuid,
+        //   characteristicId: BATTER_SERVICE.battery_character_uuid,
+        //   success:(res)=>{
+        //     console.log('####read battery ok ')
+        //     wx.onBLECharacteristicValueChange((res)=>{
+        //       console.log('####resad battery is ', this.ab2hex(res.value)) //0x0c
+        //     })
+        //   }
+        // })
      
       },
 
@@ -136,7 +196,8 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.initBLE();
+   // this.initBLE();
+    this.getdeviceList();
   },
 
   /**

@@ -1,9 +1,8 @@
 
 exports.config =  {
-
   DBPORT:23017,
-  DBHOST:'localhost',
-  DBNAME:"db_jc",
-  DBUSERNAME:"xkj",
-  DBPWD:"xukaijie311700_",
+  DBHOST:'47.114.158.49',
+  DBNAME:"db_manbu",
+  DBUSERNAME:"manbu",
+  DBPWD:"manbu123456"
 }

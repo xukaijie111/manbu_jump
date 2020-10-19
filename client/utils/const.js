@@ -1,6 +1,6 @@
 
 
-export const BASEHOST = 'http://localhost:3000'
+export const BASEAPIURL = 'http://localhost:3000'
 
 
 
@@ -13,10 +13,16 @@ export const DEVICE_INFORMATION_SERVICE = {
 }
 
 export const HUMAN_INERFACE_DEVICE_SERVICE = {
-  uuid:'00001812-0000-1000-8000-00805F9B34FB'
+  uuid:'00001812-0000-1000-8000-00805F9B34FB',
+
 }
 
 export const BATTER_SERVICE = {
   uuid:'0000180F-0000-1000-8000-00805F9B34FB',
   battery_character_uuid:'00002919-0000-1000-8000-00805F9B34FB'
+}
+
+export const SCAN_PARAMETERS = {
+  uuid:'00001813-0000-1000-8000-00805F9B34FB',
+  scan_interface_window:'00002A4F-0000-1000-8000-00805F9B34FB'
 }

@@ -3,7 +3,9 @@ let config = require('../config').config
 
 let mongoose = require("mongoose");
 // mongoose.connect('mongodb://'+config.DBHOST+'/'+config.DBNAME);
-mongoose.connect(`mongodb://${config.DBUSERNAME}:${config.DBPWD}@127.0.0.1:27017/db_jc`, {auto_reconnect: true});
+var url = `mongodb://${config.DBUSERNAME}:${config.DBPWD}@${config.DBHOST}:${config.DBPORT}/${config.DBNAME}`
+console.log('###connect url is ',url)
+mongoose.connect(url, {auto_reconnect: true});
 var db = mongoose.connection;
 
 
@@ -31,7 +33,7 @@ var userModel = mongoose.model('user',userSchema,'user');
 
 var deviceSchema = new Schema({
   id:{type:String},
-  userId:{type:String}, //userid 就是openid
+  userId:{type:String}, //userid
   isDelete:{type:Boolean}, //是否解绑
 }, {timestamps: {createdAt: 'created', updatedAt: 'updated'}});
 

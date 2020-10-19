@@ -1,8 +1,7 @@
 
 
-import {
-  userLogin
-} from './utils/request.js'
+import API from './request/api.js'
+import Storage from './utils/storage'
 //app.js
 App({
   onLaunch: function () {
@@ -16,7 +15,12 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         console.log('###login res is ',res)
-        userLogin(res.code)
+        API.userLogin({
+          code:res.code
+        })
+        .then((res)=>{
+          Storage.userId = res.userId
+        })
       }
     })
     // 获取用户信息
