@@ -6,8 +6,8 @@ page{
 .wrap{
   width: 100%;
   box-sizing: border-box;
-  height: 60rpx;
-  border-radius: 25rpx;
+  height: 80rpx;
+  border-radius: 12rpx;
   background-color: #ffffff;
   display: flex;
   align-items: center;

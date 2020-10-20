@@ -66,7 +66,7 @@ router.post('/login',async (req,res,next)=>{
   try{
     const url=`https://api.weixin.qq.com/sns/jscode2session?appid=wx03eb0a8135422d08&secret=fbf1ce432034eae95a9a57ddd24d88c8&js_code=${code}&grant_type=authorization_code`
     const ret = await axios.get(url);
-    console.log('####res is ',ret,typeof ret)
+    // console.log('####res is ',ret,typeof ret)
     const data = ret.data;
     const session_key = data.session_key;
     const open_id = data.openid;

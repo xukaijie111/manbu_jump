@@ -1,13 +1,17 @@
 <!--pages/device-list/index.wxml-->
 <view class='wrap'>
-  <view wx:for='{{lists}}' class='item-wrap' catchtap='connectBle' data-index='{{index}}'>
-    <view class="content">
-        <view class='left'>
-          <image class='jump-img' src='/images/ble.png' />
-          <view>{{item.name}}</view>
-          </view>
 
-        <view class='status-wrap' hover-class="status-wrap-hover">已绑定</view>
-    </view>
-  </view>
+<view wx:if='{{list.length}}'>
+  <block wx:for='{{list}}'>
+      <device item='{{item}}' > </device>
+  </block>
+
+</view>
+
+<view class="empty-wrap">
+  <image src='/images/empty.png' class="empty"></image>
+  <view style='margin:10rpx 0rpx'>还没有绑定设备哦~</view>
+  <button type='primary' catchtap="bindDevice">去绑定</button>
+</view>
+
 </view>

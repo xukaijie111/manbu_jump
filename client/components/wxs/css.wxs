@@ -1,0 +1,51 @@
+
+var array ={
+  isArray:function(array) {
+    return array && array.constructor === 'Array';
+  }
+}
+var object = {
+     keys:function(obj) {
+      var REGEXP = getRegExp('{|}|"', 'g');
+      return JSON.stringify(obj)
+        .replace(REGEXP, '')
+        .split(',')
+        .map(function(item) {
+          return item.split(':')[0];
+        });
+    }
+}
+
+function join(name, mods) {
+  mods = mods.map(function(mod) {
+    return name + '--' + mod;
+  });
+  mods.unshift(name);
+  return mods.join(' ');
+}
+
+function traversing(mods, conf) {
+  if (!conf) {
+    return;
+  }
+
+  if (typeof conf === 'string' || typeof conf === 'number') {
+    mods.push(conf);
+  } else if (array.isArray(conf)) {
+    conf.forEach(function(item) {
+      traversing(mods, item);
+    });
+  } else if (typeof conf === 'object') {
+    object.keys(conf).forEach(function(key) {
+      conf[key] && mods.push(key);
+    });
+  }
+}
+
+function css(name, conf) {
+  var mods = [];
+  traversing(mods, conf);
+  return join(name, mods);
+}
+
+module.exports.css = css;

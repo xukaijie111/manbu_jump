@@ -9,6 +9,10 @@
   color: #ffffff;
   font-size: 28rpx;
 }
+.item-custom-class{
+  margin-bottom: 10rpx;
+}
+
 
 .header{
   width: 100rpx;

@@ -1,5 +1,4 @@
-// pages/user/index.js
-
+// pages/sport/index.js
 import {
   compThrottled
 } from '../../utils/util.js'
@@ -9,18 +8,40 @@ Page({
    * 页面的初始数据
    */
   data: {
-    
+    selectDeviceShow:false,
+    lists: [
+      {
+        name:'jump s1'
+      },{
+        name:'jump s2'
+      }
+    ],
+    modeList:[
+     {
+       name:'自由跳模式',
+       description:'畅享欢乐跳',
+        src: '/images/jump.png' 
+     },{
+       name:'计时模式',
+       description:'手动设置时间',
+        src: '/images/time.png' 
+     },{
+       name:'计数模式',
+       description:'手动设置计数',
+        src: '/images/counter.png' 
+     }
+    ]
   },
 
-  _clickMyDevice(){
-    wx.navigateTo({
-      url: '/pages/device-list/index',
+  closeSelectDeviceShow(){
+    this.setData({
+      selectDeviceShow:false
     })
   },
 
-  _clickaddDevice(){
-    wx.navigateTo({
-      url: '/pages/bind-device/index',
+  _clickJumpMode(){
+    this.setData({
+      selectDeviceShow: true
     })
   },
 
@@ -28,8 +49,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.clickMyDevice = compThrottled(this._clickMyDevice.bind(this))
-    this.clickaddDevice = compThrottled(this._clickaddDevice.bind(this))
+    this.clickJumpMode = compThrottled(this._clickJumpMode.bind(this))
   },
 
   /**

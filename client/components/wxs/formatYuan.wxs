@@ -1,0 +1,17 @@
+function formatYuan (s) {
+  if (!s) return '0'
+  if (s === 0 || s === '0') return '0'
+  if (typeof s === 'string') s = parseFloat(s);
+  // s =  s.replace(/((\d+)\.0+|([0-9\.]+[1-9])0)$/, '$2$3')
+  // return s
+  
+  if(s % 100 === 0 ){
+    return (s / 100)
+  }else if(s % 10 === 0){
+    return (s / 100).toFixed(1)
+  }else{
+    return (s / 100).toFixed(2)
+  }
+}
+
+ module.exports.formatYuan = formatYuan;

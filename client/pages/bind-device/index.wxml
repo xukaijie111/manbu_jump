@@ -1,0 +1,11 @@
+<!--pages/bind-device/index.wxml-->
+<view class="wrap">
+
+  <block wx:for='{{list}}'>
+      <device item='{{item}}' >
+          <view class="operation">
+              
+          </view>
+       </device>
+  </block>
+</view>

@@ -1,0 +1,12 @@
+
+<wxs src="../wxs/utils.wxs" module="utils" />
+
+<view
+    class='custom-class {{utils.css("overlay",[{animation}])}}'
+    style='background-color:{{color?color:""}}; {{customStyle}}'
+    catch:tap="close"
+>
+
+<slot />
+
+</view>

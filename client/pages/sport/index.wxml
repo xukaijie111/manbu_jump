@@ -1,0 +1,21 @@
+<!--pages/sport/index.wxml-->
+<view class="wrap">
+
+    <view class="title">以下为基础模式，自动上传运动数据</view>
+
+      <view class="mode-item" wx:for='{{modeList}}' hover-class="hover" catchtap="clickJumpMode">
+            <view class="left">
+                <view class="name">{{item.name}}</view>
+                <view class="description">{{item.description}}</view>
+            </view>
+            <view class="right">
+                <view class='image-wrap'>
+                  <image src='{{item.src}}' class="img"></image>
+                </view>
+            </view>
+      </view>
+
+        <view class="title">以下为竞技模式，自动上传运动数据</view>
+
+<select-device  show='{{selectDeviceShow}}' catch:close='closeSelectDeviceShow'/>
+</view>

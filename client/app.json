@@ -1,18 +1,42 @@
 {
   "pages": [
-            "pages/device-list/index",
-        "pages/index/index",
-
+    "pages/index/index",
+    "pages/device-list/index",
+    "pages/sport/index",
     "pages/user/index",
-
-    "pages/logs/logs"
-
+    "pages/logs/logs",
+    "pages/bind-device/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "Weixin",
     "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#B4B4B4",
+    "selectedColor": "#007947",
+    "backgroundColor": "#FFFFFF",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home.png",
+        "selectedIconPath": "images/home-active.png"
+      },
+      {
+        "pagePath": "pages/sport/index",
+        "text": "运动",
+        "iconPath": "images/sport.png",
+        "selectedIconPath": "images/sport-active.png"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "text": "我的",
+        "iconPath": "images/user.png",
+        "selectedIconPath": "images/user-active.png"
+      }
+    ]
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json"

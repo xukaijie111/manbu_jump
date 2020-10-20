@@ -1,0 +1,12 @@
+
+<wxs src="../wxs/utils.wxs" module="utils" />
+
+
+<view wx:if='{{_show}}' class='custom-class'>
+  <overlay color='{{!show?"transparent":""}}' custom-style='{{overlayStyle}}' catch:close='closeSheet'>
+      <view class='{{utils.css("content-wrap",[{showAction:show,hideAction:!show}])}}' catch:tap="preventPop">
+          <slot />
+          <slot name='op'/>
+      </view>
+  </overlay>
+</view>

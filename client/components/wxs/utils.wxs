@@ -1,0 +1,9 @@
+var css = require('./css.wxs').css;
+var addUnit = require('./style.wxs').addUnit;
+var formatYuan = require('./formatYuan.wxs').formatYuan;
+
+module.exports = {
+  css:css,
+  addUnit:addUnit,
+  formatYuan:formatYuan
+}

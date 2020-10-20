@@ -1,5 +1,6 @@
 <!--pages/user/components/cell/index.wxml-->
-<view class="wrap {{isLink?'link':''}}" hover-class="hover">
+<view class="custom-class wrap {{isLink?'link':''}}" 
+hover-class="hover"  catchtap="click">
     <view class="left">{{title}}</view>
 
     <view class="right">

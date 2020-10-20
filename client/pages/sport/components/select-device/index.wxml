@@ -1,0 +1,4 @@
+<!--pages/sport/components/select-device/index.wxml-->
+<action-sheet show='{{show}}' overlay-style='z-index:10000' catch:close="close">
+  <view>设备列表</view>
+</action-sheet>

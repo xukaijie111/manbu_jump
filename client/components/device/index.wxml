@@ -1,0 +1,10 @@
+<!--components/device/index.wxml-->
+ <view class='item-wrap' catchtap='clickItem'>
+    <view class="content">
+        <view class='left'>
+          <image class='jump-img' src='/images/ble.png' />
+          <view>{{item.name}}</view>
+        </view>
+        <slot />
+    </view>
+  </view>
