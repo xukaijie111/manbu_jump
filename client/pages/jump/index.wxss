@@ -1,0 +1,35 @@
+/**index.wxss**/
+
+page{
+  background: #000000;
+  opacity: 0.9;
+  height: 100%;
+}
+.title{
+  color: #fff;
+  margin-bottom: 40rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-wrap{
+  width: 200rpx;
+  height: 200rpx;
+  position: absolute;
+  bottom: 100rpx;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+   box-shadow:0 2rpx 10rpx 0 rgba(111,63,59,0.12);
+   color: #ffffff;
+   background-color: rgba(255,255,255,0.3);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   transform-origin: 50% 50% 0
+}
+
+.btn-wrap-hover{
+  transform: scale(0.8) translateX(-50%);
+}

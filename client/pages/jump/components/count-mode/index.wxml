@@ -1,0 +1,25 @@
+<!--pages/jump/components/count-mode/index.wxml-->
+
+<view class="wrap">
+    <view class="canvas-wrap">
+      <ec-canvas id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{ ec }}"></ec-canvas>
+    </view>
+
+    <view class="info-wrap">
+          <view class="time-wrap flex-column">
+              <view>时间</view>
+              <view>00:00</view>
+          </view>
+
+          <view class="time-wrap flex-column">
+              <view>个数</view>
+              <view>3</view>
+          </view>
+
+          <view class="time-wrap flex-column">
+              <view>卡路里</view>
+              <view>123</view>
+          </view>
+
+    </view>
+</view>

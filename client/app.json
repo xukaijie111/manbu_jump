@@ -1,11 +1,15 @@
 {
   "pages": [
+            "pages/jump/index",
+        "pages/sport/index",
+
     "pages/index/index",
     "pages/device-list/index",
-    "pages/sport/index",
+
     "pages/user/index",
     "pages/logs/logs",
     "pages/bind-device/index"
+
   ],
   "window": {
     "backgroundTextStyle": "light",

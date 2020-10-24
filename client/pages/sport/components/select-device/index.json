@@ -1,6 +1,7 @@
 {
   "component": true,
   "usingComponents": {
-    "action-sheet":"/components/action-sheet/index"
+    "action-sheet":"/components/action-sheet/index",
+    "device":"../../../components/device/index"
   }
 }

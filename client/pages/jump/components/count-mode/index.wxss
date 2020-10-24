@@ -1,0 +1,28 @@
+/* pages/jump/components/count-mode/index.wxss */
+
+.wrap{
+  font-size: 32rpx;
+}
+.canvas-wrap{
+    box-sizing: border-box;
+  width: 600rpx;
+  height: 600rpx;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.info-wrap{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  color: #ffffff;
+}
+
+.flex-column{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column
+}

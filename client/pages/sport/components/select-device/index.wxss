@@ -1,1 +1,20 @@
 /* pages/sport/components/select-device/index.wxss */
+
+.wrap{
+  min-height: 500rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.item-wrap{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0rpx 30rpx;
+}
+
+.btn{
+  margin: 0rpx;
+}

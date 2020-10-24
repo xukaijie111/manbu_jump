@@ -1,4 +1,17 @@
 <!--pages/sport/components/select-device/index.wxml-->
 <action-sheet show='{{show}}' overlay-style='z-index:10000' catch:close="close">
-  <view>设备列表</view>
+<view class="wrap">
+    <view wx:if='{{lists.length}}' style="width:100%">
+
+        <view class="item-wrap" wx:for='{{lists}}'>
+          <device item='{{item}}'>
+            <button type='primary' size='mini' 
+            data-index='{{index}}'
+            catchtap="connectDeviceClick" class="btn">连接</button>
+          </device>
+        </view>
+    
+    </view>
+    <view wx:else>正在搜索设备....</view>
+</view>
 </action-sheet>

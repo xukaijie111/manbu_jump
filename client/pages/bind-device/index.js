@@ -51,6 +51,9 @@ Page({
   findBLE: function () {
     wx.startBluetoothDevicesDiscovery({
       success: (res) => {
+        this.setData({
+          isfound:true
+        })
         const timer = setInterval(() => {
           this.discoveryBLE()
         }, 2000)
@@ -64,6 +67,9 @@ Page({
     wx.openBluetoothAdapter({
       success: (res) => {
         console.log('打开蓝牙适配成功', res)
+        this.setData({
+          isadapter:true
+        })
         this.findBLE();
       },
       fail: (err) => {
@@ -78,9 +84,24 @@ Page({
   uninitBle() {
     if (this.data.timer) {
       clearInterval(this.data.timer)
+      this.setData({
+        timer:null
+      })
     }
-    wx.stopBluetoothDevicesDiscovery();
+    if (this.data.isfound) {
+      wx.stopBluetoothDevicesDiscovery();
+      this.setData({
+        isfound:false
+      })
+    }
+
+  if (this.data.isadapter) {
     wx.closeBluetoothAdapter();
+    this.setData({
+      isadapter:false
+    })
+  }
+
   },
 
 

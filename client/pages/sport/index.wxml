@@ -17,5 +17,9 @@
 
         <view class="title">以下为竞技模式，自动上传运动数据</view>
 
-<select-device  show='{{selectDeviceShow}}' catch:close='closeSelectDeviceShow'/>
+<select-device  
+lists='{{lists}}'
+bind:connect = 'connectBle'
+show='{{selectDeviceShow}}'
+ catch:close='closeSelectDeviceShow'/>
 </view>

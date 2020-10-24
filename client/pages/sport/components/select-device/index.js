@@ -5,7 +5,8 @@ sqbComponent({
    * 组件的属性列表
    */
   properties: {
-        show:Boolean
+        show:Boolean,
+        lists:Array
   },
 
   /**
@@ -21,6 +22,10 @@ sqbComponent({
   methods: {
     close(){
       this.$emit('close')
+    },
+    connectDeviceClick(e){
+      const index = e.currentTarget.dataset.index;
+      this.$emit('connect',{index})
     }
   }
 })

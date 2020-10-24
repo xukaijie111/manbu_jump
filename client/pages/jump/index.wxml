@@ -1,0 +1,10 @@
+<!--index.wxml-->
+<view>
+
+<view class="title">设备:{{name}}</view>
+
+<count-mode />
+
+<view class="btn-wrap" hover-class="btn-wrap-hover">开始</view>
+
+</view>
