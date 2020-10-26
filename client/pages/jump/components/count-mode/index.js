@@ -14,7 +14,7 @@ function initChart(canvas, width, height, dpr) {
   canvas.setChart(chart);
 
   var option = {
-    backgroundColor: "#000000",
+    backgroundColor: "#ffffff",
     color: ["#37A2DA", "#32C5E9", "#67E0E3"],
     series: [{
       name: '业务指标',

@@ -1,9 +1,9 @@
 <!--pages/jump/components/count-mode/index.wxml-->
 
 <view class="wrap">
-    <view class="canvas-wrap">
+    <!-- <view class="canvas-wrap">
       <ec-canvas id="mychart-dom-gauge" canvas-id="mychart-gauge" ec="{{ ec }}"></ec-canvas>
-    </view>
+    </view> -->
 
     <view class="info-wrap">
           <view class="time-wrap flex-column">

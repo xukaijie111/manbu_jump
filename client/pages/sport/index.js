@@ -167,12 +167,12 @@ Page({
       })
     }
 
-    if (this.data.isadapter) {
-      wx.closeBluetoothAdapter();
-      this.setData({
-        isadapter: false
-      })
-    }
+    // if (this.data.isadapter) {
+    //   wx.closeBluetoothAdapter();
+    //   this.setData({
+    //     isadapter: false
+    //   })
+    // }
   },
 
 

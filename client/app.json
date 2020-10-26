@@ -1,8 +1,8 @@
 {
   "pages": [
-            "pages/jump/index",
-        "pages/sport/index",
 
+        "pages/sport/index",
+            "pages/jump/index",
     "pages/index/index",
     "pages/device-list/index",
 
