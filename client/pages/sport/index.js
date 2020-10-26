@@ -4,6 +4,7 @@ import {
 } from '../../utils/util.js'
 
 import Ble from '../../utils/ble.js'
+import Storage from '../../utils/storage.js'
 Page({
 
   /**
@@ -11,6 +12,8 @@ Page({
    */
   data: {
     selectDeviceShow:false,
+    selectTimeShow:false,
+    selectCountShow:false,
     lists: [
    
     ],
@@ -24,20 +27,60 @@ Page({
      },{
        name:'计时模式',
        description:'手动设置时间',
-        src: '/images/time.png' 
+        src: '/images/time.png' ,
      },{
        name:'计数模式',
        description:'手动设置计数',
-        src: '/images/counter.png' 
+        src: '/images/counter.png' ,
      }
     ]
   },
 
+  eidtClick(e) {
+    const index = e.currentTarget.dataset.index;
+    if (index === 1) { //设置时间
+        this.setData({
+          selectTimeShow:true
+        })
+    } else if (index === 2) { //设置个数
+        this.setData({
+          selectCountShow:true
+        })
+    }
+  },
+
+  closeSelectCountShow(){
+    this.setData({
+      selectCountShow: false
+    })
+  },
+
+  closeSelectTimeShow(){
+    this.setData({
+      selectTimeShow:false
+    })
+  },
   closeSelectDeviceShow(){
     this.uninitBle();
     this.setData({
       selectDeviceShow:false
     })
+  },
+
+  clickTime(e) {
+    const jumpMinute = e.value;
+    this.setData({
+      [`modeList[1].value`]: `${jumpMinute}分钟`,
+    })
+    Storage.jumpMinute = jumpMinute;
+  },
+
+  clickCount(e) {
+    const jumpCount = e.value;
+    this.setData({
+      [`modeList[2].value`]: `${jumpCount}个`
+    })
+    Storage.jumpCount = jumpCount;
   },
 
   async _clickJumpMode(){
@@ -83,6 +126,12 @@ Page({
   onLoad: function (options) {
     this.clickJumpMode = compThrottled(this._clickJumpMode.bind(this))
     this.connectBle = compThrottled(this._connectBle.bind(this))
+    const jumpMinute = Storage.jumpMinute || 30
+    const jumpCount = Storage.jumpCount || 1000
+    this.setData({
+      [`modeList[1].value`]:`${jumpMinute}分钟`,
+      [`modeList[2].value`]: `${jumpCount}个`
+    })
   },
 
 

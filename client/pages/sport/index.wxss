@@ -64,6 +64,28 @@ page{
 .description{
   color: #999999;
   font-size: 28rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.edit{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #333333;
+}
+
+.edit-btn{
+  background: #007947;
+  padding: 0rpx 10rpx;
+  border-radius: 4rpx;
+  color: #ffff;
+  margin-left: 10rpx
+}
+
+.edit-btn-hover{
+  opacity: 0.8
 }
 
 .image-wrap{

@@ -6,11 +6,18 @@
       <view class="mode-item" wx:for='{{modeList}}' hover-class="hover" catchtap="clickJumpMode">
             <view class="left">
                 <view class="name">{{item.name}}</view>
-                <view class="description">{{item.description}}</view>
+                <view class="description">
+                    <view>{{item.description}}</view>
+                    <view wx:if='{{item.value}}' class="edit">(
+                          <view> {{item.value}}</view>
+                          <view class="edit-btn" hover-class="edit-btn-hover" data-index = '{{index}}' catchtap="eidtClick">修改</view>)
+                        
+                    </view>
+                </view>
             </view>
             <view class="right">
                 <view class='image-wrap'>
-                  <image src='{{item.src}}' class="img"></image>
+                  <image src='{{item.src}}' class="img" ></image>
                 </view>
             </view>
       </view>
@@ -23,3 +30,15 @@ bind:connect = 'connectBle'
 show='{{selectDeviceShow}}'
  catch:close='closeSelectDeviceShow'/>
 </view>
+
+<select-time 
+show='{{selectTimeShow}}'
+  bind:click='clickTime'
+   catch:close='closeSelectTimeShow'
+/>
+
+<select-count
+show='{{selectCountShow}}'
+  bind:click='clickCount'
+   catch:close='closeSelectCountShow'
+/>

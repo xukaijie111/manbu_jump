@@ -1,0 +1,10 @@
+<!--pages/sport/components/select-time/index.wxml-->
+<action-sheet show='{{show}}' overlay-style='z-index:10000' catch:close="close">
+<view class="wrap">
+      <view class="title">选择时间</view>
+
+      <view wx:for='{{lists}}' class="item-wrap">
+          {{item.value}}分钟
+      </view>
+</view>
+</action-sheet>

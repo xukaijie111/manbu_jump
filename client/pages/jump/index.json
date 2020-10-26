@@ -1,7 +1,7 @@
 {
   "navigationBarBackgroundColor": "#007947",
   "navigationBarTextStyle": "white",
-  "navigationBarTitleText": "跳绳",
+
   "usingComponents": {
       "count-mode":"./components/count-mode/index",
       "ec-canvas": "/ec-canvas/ec-canvas"
