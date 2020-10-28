@@ -7,7 +7,7 @@ Page({
   data:{
     time:'00:00:00',
     count:0,
-   
+    timeModeValue:0
   },
 
 

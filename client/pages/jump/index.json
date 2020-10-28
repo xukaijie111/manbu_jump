@@ -4,6 +4,7 @@
 
   "usingComponents": {
       "count-mode":"./components/count-mode/index",
+      "time-mode":"./components/time-mode/index",
       "ec-canvas": "/ec-canvas/ec-canvas"
   }
 }

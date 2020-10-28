@@ -3,8 +3,30 @@
 
 <view class="title">设备:{{name}}</view>
 
-<count-mode />
+<time-mode  time='{{timeModeValue}}'/>
 
-<view class="btn-wrap" hover-class="btn-wrap-hover">开始</view>
+
+    <view class="info-wrap">
+          <view class="time-wrap flex-column">
+              <view>时间</view>
+              <view>{{time}}</view>
+          </view>
+
+          <view class="time-wrap flex-column">
+              <view>个数</view>
+              <view>{{count}}</view>
+          </view>
+
+          <view class="time-wrap flex-column">
+              <view>卡路里</view>
+              <view>123</view>
+          </view>
+
+    </view>
+<view class="btn-wrap" >
+
+<view class="btn" hover-class="hover">开始</view>
+
+</view>
 
 </view>

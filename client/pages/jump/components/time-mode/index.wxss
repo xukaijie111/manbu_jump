@@ -1,1 +1,17 @@
 /* pages/jump/components/time-mode/index.wxss */
+.time-mode-wrap{
+  margin-bottom: 100rpx;
+}
+.time-wrap{
+  width: 300rpx;
+  height: 300rpx;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 10rpx solid #007947;
+  color: #007947;
+  font-size: 48rpx;
+  font-weight: bold;
+  border-radius: 50%
+}

@@ -12,17 +12,3 @@
   align-items: center;
   justify-content: center;
 }
-
-.info-wrap{
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  color: #ffffff;
-}
-
-.flex-column{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column
-}

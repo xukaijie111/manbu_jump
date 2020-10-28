@@ -1,2 +1,8 @@
 <!--pages/jump/components/time-mode/index.wxml-->
-<text>pages/jump/components/time-mode/index.wxml</text>
+
+
+<view class="time-mode-wrap">
+
+      <view class="time-wrap">{{timeStr}}</view>
+
+</view>
