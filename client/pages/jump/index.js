@@ -1,32 +1,34 @@
 
+
 import Ble from '../../utils/ble.js'
+import moment from '../../moment/index.js'
+
 Page({
   data:{
+    time:'00:00:00',
+    count:0,
    
   },
 
-  // 16进制转10进制
-  hex2dex(str) {
-    return parsetInt(parseInt(str, 16).toString(10));
-  },
-
-  ab2hex(buffer) {
-    let hexArr = Array.prototype.map.call(
-      new Uint8Array(buffer),
-      function (bit) {
-        return ('00' + bit.toString(16)).slice(-2)
-      }
-    )
-    return hexArr.join('');
-  },
 
   handleResult(res){
       
   },
 
+  changeDate(seconds) {
+    var data = moment.duration(seconds, 'seconds')
+
+    // 案例：时分秒 00:00:00
+    return [data.hours(), data.minutes(), data.seconds()].join(":")
+
+  },
+
   onNotifyCharacterValue(){
     Ble.listenCharacterValue(this.data.deviceId,(value)=>{
-        
+          this.setData({
+            time: this.changeDate(value.time),
+            count:value.count
+          })
     })
   },
 
@@ -44,9 +46,9 @@ Page({
   },
 
   onReady(){
-    Ble.listenCharacterValue(this.data.deviceId)
-    setInterval(()=>{
-      this.sendReadDataCmd();
-    },2000)
+    // this.onNotifyCharacterValue();
+    // setInterval(()=>{
+    //   this.sendReadDataCmd();
+    // },2000)
   },
 })

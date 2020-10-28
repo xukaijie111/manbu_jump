@@ -11,7 +11,7 @@ class Ble{
   }
 
   listenBleState(){
-    wx.onBLEConnectionStateChange(function (res) {
+    wx.onBLEConnectionStateChange( (res) =>{
         const deviceId = res.deviceId;
       const connected = res.connected
       const deviceIdLists = this.lists.map((l)=>{return l.deviceId})
@@ -23,19 +23,34 @@ class Ble{
     })
   }
 
- async connectDevice(deviceId){
+ connectDevice(deviceId){
     return new Promise((resolve,reject)=>{
       wx.createBLEConnection({
         deviceId,
         success: (res) => {
+          console.log('####connect suc')
           resolve();
         },
         fail:(err)=>{
+          console.log('###connect fail',err)
           reject();
         }
       })
     })
 
+  }
+  buf2Array(buffer) { // buffer is an ArrayBuffer
+    var dataView = new DataView(buffer);
+    var countL = dataView.getUint16(2);
+    var countH = dataView.getUint16(3);
+    var timeL = dataView.getUint16(4);
+    var timeH = dataView.getUint16(5);
+    var time = timeH?timeH+255+timeL:timeL
+    var count = countH ? countH + 255 + countL : countL
+    return{
+      count,
+      time
+    }
   }
 
  // 监听计数的值
@@ -49,7 +64,7 @@ class Ble{
         console.log('####notifyBLECharacteristicValueChange suc', res)
         wx.onBLECharacteristicValueChange((res) => {
           console.log(`characteristic ${res.characteristicId} has changed, now is ${res.value}`)
-          const hex = this.ab2hex(res.value)
+          const hex = this.buf2Array(res.value)
           console.log(hex, typeof hex)
           callback(hex)
         })
@@ -60,26 +75,31 @@ class Ble{
     })
   }
 
-  async openAdapter(){
+  openAdapter(){
     return new Promise((resolve,reject)=>{
       wx.openBluetoothAdapter({
         success: function(res) {
+          console.log('###open adapter suc')
           resolve()
         },
         fail:(err)=>{
+          console.log('###open adapter fail',err)
           reject();
         }
       })
     })
   }
 
-  async startDiscoveryBleDevice(){
+  startDiscoveryBleDevice(){
     return new Promise((resolve,reject)=>{
       wx.startBluetoothDevicesDiscovery({
         success: (res) => {
+          console.log('###startBluetoothDevicesDiscovery suc')
             resolve();
         },
         fail:(err) =>{
+          console.log('###startBluetoothDevicesDiscovery fail',err)
+
           reject();
         }
       })
@@ -88,6 +108,10 @@ class Ble{
   }
 
   stopDiscoverBleDevice(){
+    if (this.timer) {
+      clearInterval(this.timer)
+      this.timer = null;
+    }
     wx.stopBluetoothDevicesDiscovery({
       success: function(res) {},
       fail:(err)=>{
@@ -101,45 +125,49 @@ class Ble{
       clearInterval(this.timer);
       this.timer = null;
     }
-    wx.getBluetoothDevices({
-      success: (res) => {
-        console.log(res.devices)
-        var filterDevices = res.devices;
-        var filterDevices = res.devices.filter((d) => {
-          if (d.advertisServiceUUIDs && d.advertisServiceUUIDs.length) {
-            const uuid = d.advertisServiceUUIDs[0];
-            const list = uuid.split('-');
-            if (list[0].indexOf('1812') !== -1) {
-              return true
+
+    this.timer = setInterval(()=>{
+      wx.getBluetoothDevices({
+        success: (res) => {
+          console.log(res.devices)
+          var filterDevices = res.devices;
+          var filterDevices = res.devices.filter((d) => {
+            if (d.advertisServiceUUIDs && d.advertisServiceUUIDs.length) {
+              const uuid = d.advertisServiceUUIDs[0];
+              const list = uuid.split('-');
+              if (list[0].indexOf('1812') !== -1) {
+                return true
+              } else {
+                return false;
+              }
             } else {
-              return false;
+              return false
             }
-          } else {
-            return false
-          }
-        })
-        var lists = filterDevices.filter((f) => {
-          let uuidsList = [];
-          this.lists.forEach((l) => {
-            uuidsList = uuidsList.concat(l.advertisServiceUUIDs)
           })
-          const index = uuidsList.indexOf(f.advertisServiceUUIDs[0]);
-          if (index !== -1) {
-            return false
-          } else {
-            return true;
-          }
-        })
-      
-        this.lists = this.lists.concat(lists)
-      }
-    })
+          var lists = filterDevices.filter((f) => {
+            let uuidsList = [];
+            this.lists.forEach((l) => {
+              uuidsList = uuidsList.concat(l.advertisServiceUUIDs)
+            })
+            const index = uuidsList.indexOf(f.advertisServiceUUIDs[0]);
+            if (index !== -1) {
+              return false
+            } else {
+              return true;
+            }
+          })
+
+          this.lists = this.lists.concat(lists)
+        }
+      })
+    },2000)
+   
   }
 
   async findBleDevices(){
     try{
         await this.openAdapter();
-        await startDiscoveryBleDevice();
+        await this.startDiscoveryBleDevice();
         this.getBleDevice();
     }catch(err){
 

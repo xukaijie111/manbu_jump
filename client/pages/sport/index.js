@@ -109,8 +109,9 @@ Page({
     const name = this.data.lists[index].name
 
     try{
-      await Ble.connectDevice(device);
+      await Ble.connectDevice(deviceId);
       wx.hideLoading();
+      Ble.stopDiscoverBleDevice();
       wx.navigateTo({
         url: `/pages/jump/index?deviceId=${deviceId}&name=${name}`,
       })
