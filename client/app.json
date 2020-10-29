@@ -1,11 +1,13 @@
 {
   "pages": [
+
+        "pages/index/index",
                 "pages/jump/index",
             "pages/sport/index",
 
 
 
-    "pages/index/index",
+
     "pages/device-list/index",
 
     "pages/user/index",
