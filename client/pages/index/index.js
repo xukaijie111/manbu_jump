@@ -6,16 +6,40 @@ import moment from '../../moment/index.js'
 const app = getApp()
 
 var option = {
+  title:{
+    subtext: '卡路里',
+    subtextStyle: {          //对应样式
+      color: '#007947',
+      fontSize: 12
+    },
+  },
   backgroundColor: "#ffffff",
   xAxis: [
     {
+      axisLabel: {
+        interval: 0,    //强制文字产生间隔
+        rotate: 45,     //文字逆时针旋转45°
+        textStyle: {    //文字样式
+          color: "#007947",
+          fontSize: 12,
+          fontFamily: 'Microsoft YaHei'
+        }
+      },
       type: 'category',
       data: [1, 2, 3, 4, 5, 6, 7, 8]        //待传入的参数result ，此为时间的横坐标，其实也是一个数组
     }
   ],
   yAxis: [
     {
-      type: 'value'
+      axisLabel:{
+        textStyle: {    //文字样式
+          color: "#007947",
+          fontSize: 12,
+          fontFamily: 'Microsoft YaHei'
+        }
+      },
+      type: 'value',
+
     }
   ],
   series: [
