@@ -16,8 +16,8 @@ class Ble{
       const connected = res.connected
       const deviceIdLists = this.lists.map((l)=>{return l.deviceId})
       const index = deviceIdLists.indexOf(deviceId)
-      if (index !== -1) {
-        this.lists[index].connected = connected
+      if (index !== -1 && !connected) {
+        this.lists.splice(index,1)
       }
 
     })
