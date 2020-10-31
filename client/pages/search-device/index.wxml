@@ -13,7 +13,7 @@
       <view class="sp sp-wave"></view>
   </view>
 
-  <view wx:else>
+  <view wx:else style="margin-top:30rpx">
     <view class="item-wrap" wx:for='{{lists}}'>
           <device item='{{item}}'>
             <button type='primary' size='mini' 

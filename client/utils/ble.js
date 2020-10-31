@@ -41,10 +41,10 @@ class Ble{
   }
   buf2Array(buffer) { // buffer is an ArrayBuffer
     var dataView = new DataView(buffer);
-    var countL = dataView.getUint16(2);
-    var countH = dataView.getUint16(3);
-    var timeL = dataView.getUint16(4);
-    var timeH = dataView.getUint16(5);
+    var countL = dataView.getUint8(2);
+    var countH = dataView.getUint8(3);
+    var timeL = dataView.getUint8(4);
+    var timeH = dataView.getUint8(5);
     var time = timeH?timeH+255+timeL:timeL
     var count = countH ? countH + 255 + countL : countL
     return{
@@ -201,6 +201,66 @@ class Ble{
         console.log('###write cmd error is ', err)
       }
     })
+  }
+
+  sendMode(deviceId,mode,options){
+    var buffer = new ArrayBuffer(7);
+    var dataview = new DataView(buffer)
+    dataview.setUint8(0,0xf3)
+    if (mode === 0) {
+      dataview.setUint8(1,0)
+      dataview.setUint16(2,0)
+      dataview.setUint16(4,0)
+      dataview.setUint8(6,0xf3)
+    }else if (mode === 1) { //时间跳
+      var hour = parseInt(options.hour);
+      var minute = parseInt(options.minute);
+      var seconds = hour*60*60+minute*60;
+      let high = 0;
+      let low = seconds;
+      if (seconds > 255) {
+        high = seconds - 255
+        low = 255
+      }
+      dataview.setUint8(1,1)
+      dataview.setUint8(2,low)
+      dataview.setUint8(3,high)
+      dataview.setUint16(4,seconds)
+      dataview.setUint8(6,0xf3+1+seconds)
+    }else if(mode === 2) {
+      var count = options.count;
+      let high = 0;
+      let low = seconds;
+      if (count > 255) {
+        high = seconds - 255
+        low = 255
+      }
+      dataview.setUint8(1,2)
+      dataview.setUint8(2,low)
+      dataview.setUint8(3,high)
+      dataview.setUint16(4,0)
+      dataview.setUint8(6,0xf3+2+count)
+    }
+
+    return new Promise((resolve,reject)=>{
+      wx.writeBLECharacteristicValue({
+        characteristicId: SCAN_PARAMETERS.scan_interface_window,
+        deviceId,
+        serviceId: SCAN_PARAMETERS.uuid,
+        value: buffer,
+        success:(res)=>{
+          console.log('##set mode suc')
+          resolve();
+        },
+        fail:(err) =>{
+          console.log(err)
+          reject()
+        }
+      })
+    })
+
+
+
   }
 
 }

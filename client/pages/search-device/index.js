@@ -33,6 +33,26 @@ Page({
     this.setData({timer});
   },
 
+  connectDeviceClick(e){
+    const index = e.currentTarget.dataset.index;
+    const deviceId = this.data.lists[index].deviceId;
+    wx.showLoading({
+      title: '连接中...',
+    })
+    Ble.connectDevice(deviceId)
+    .then(()=>{
+      wx.hideLoading()
+      wx.redirectTo({
+        url: `/pages/jump/index?mode=${this.data.mode}&deviceId=${deviceId}`,
+      })
+    },()=>{
+      wx.hideLoading()
+      wx.showToast({
+        title: '连接失败',
+      })
+    })
+  },
+
   clearTimer(){
     if (this.data.timer) {
       clearInterval(this.data.timer)
@@ -59,6 +79,8 @@ Page({
    */
   onUnload: function () {
     this.clearTimer();
+    
+    Ble.stopDiscoverBleDevice();
   },
 
   /**
