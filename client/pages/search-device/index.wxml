@@ -9,7 +9,19 @@
     <view>3、请确认手机开启蓝牙功能</view>
   </view>
 
-  <view class="col-sm-2">
+  <view class="col-sm-2" wx:if='{{!lists.length}}'>
       <view class="sp sp-wave"></view>
-    </view>
+  </view>
+
+  <view wx:else>
+    <view class="item-wrap" wx:for='{{lists}}'>
+          <device item='{{item}}'>
+            <button type='primary' size='mini' 
+            data-index='{{index}}'
+            catchtap="connectDeviceClick" class="btn">连接</button>
+          </device>
+        </view>
+  </view>
 </view>
+
+

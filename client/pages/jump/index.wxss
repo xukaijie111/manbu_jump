@@ -1,10 +1,13 @@
 
 page{
   background-color: #000000;
+  height: 100%;
 }
 
 .wrap{
   color: #ffffff;
+  height: 100%;
+
 }
 
 .time-wrap{
@@ -40,4 +43,26 @@ page{
   flex-direction: column;
   align-items: center;
   margin-left: 200rpx;
+}
+
+.time-2{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 0rpx;
+  flex: 1;
+}
+
+.base{
+  border-top: 1px solid gray;
+}
+
+.free-wrap{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+  font-size: 180rpx;
 }

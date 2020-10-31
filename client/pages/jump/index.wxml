@@ -35,4 +35,21 @@
         </view>
     </view>
 
+    <view class="free-wrap" wx:if='{{mode === 0}}'>
+        <view class="time-2">
+            <view >{{nowTime}}</view>
+            <view class="gray-1 size-24">分:秒</view>
+        </view>
+        <view class="time-2 base">
+            <view >{{nowCount}}</view>
+            <view class="gray-1 size-24">个</view>
+        </view>
+      
+        <view class="time-2 base">
+            <view >{{ka}}</view>
+            <view class="gray-1 size-24">卡</view>
+        </view>
+      
+    </view>
+
 </view>

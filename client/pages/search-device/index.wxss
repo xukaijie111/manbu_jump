@@ -117,3 +117,14 @@ page{
     opacity: 0;
   }
 }
+
+
+.item-wrap{
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0rpx 30rpx;
+}
+
+.btn{
+  margin: 0rpx;
+}
