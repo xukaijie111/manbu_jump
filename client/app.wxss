@@ -4,6 +4,10 @@ page{
   Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'Hiragino Sans GB',
   'Microsoft Yahei', sans-serif;
 }
+
+.number{
+  
+}
 .gray-1{
   color:gray;
 }
@@ -21,4 +25,14 @@ page{
 
 .size-20{
   font-size: 20rpx;
+}
+
+.size-32{
+  font-size: 32rpx;
+}
+.size-40{
+  font-size: 40rpx;
+}
+.size-48{
+  font-size: 48rpx;
 }

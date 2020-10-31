@@ -92,13 +92,13 @@ Page({
     lists:[
       {
         name:'次数',
-        value:0
+        value:'--'
       },{
         name:'时间',
-        value:0
+        value:'--'
       },{
         name:'卡路里',
-        value:0
+        value:'--'
       }
     ],
     modeList:[

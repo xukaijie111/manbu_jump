@@ -14,10 +14,13 @@ page{
 
 .content{
   position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   top: 40%;
-  font-size: 60rpx;
+  font-size: 80rpx;
+  width: 100%;
 }
 
 .free{
@@ -28,9 +31,10 @@ page{
   font-style: normal;
   font-size: 28rpx;
  padding:0rpx 30rpx;
- background-color: green;
+ background-color: #07c160;
  border-radius: 8rpx;
  margin-top: 10rpx;
+ text-align: center;
 }
 
 .time{

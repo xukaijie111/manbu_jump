@@ -7,16 +7,20 @@
       畅享自由跳
     </view>
     <view wx:if='{{mode === 1}}' class="time">
-      <view>{{hour}}时{{minute}}分</view>
+      <view class="number">{{hour}}时{{minute}}分</view>
+      <picker mode="time" value="{{time}}" bindchange="bindTimeChange">
       <view type="primary" size='mini' class="edit">编辑</view>
+      </picker>
+     
     </view>
     <view wx:if='{{mode === 2}}' class="free">
-      <view>{{count}}<text class="unit">个</text></view>
+      <view class="number">{{count}}<text class="unit">个</text></view>
+      <picker bindchange="bindPickerChange" value="{{index}}" range="{{countArray}}">
       <view type="primary" size='mini' class="edit">编辑</view>
-
+        </picker>
     </view>
   </view>
 
-  <button type="primary" class="btn">开始</button>
+  <button type="primary" class="btn" catchtap='clickSubmit'>开始</button>
 
 </view>

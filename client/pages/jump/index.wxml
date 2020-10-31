@@ -1,32 +1,38 @@
-<!--index.wxml-->
-<view>
 
-<view class="title">设备:{{name}}</view>
+<view class="wrap">
 
-<time-mode  time='{{timeModeValue}}'/>
-
-
-    <view class="info-wrap">
-          <view class="time-wrap flex-column">
-              <view>时间</view>
-              <view>{{time}}</view>
-          </view>
-
-          <view class="time-wrap flex-column">
-              <view>个数</view>
-              <view>{{count}}</view>
-          </view>
-
-          <view class="time-wrap flex-column">
-              <view>卡路里</view>
-              <view>123</view>
-          </view>
-
+    <view class="time-wrap" wx:if='{{mode === 1}}'>
+        <view class="time">
+            <view >{{hour}}:{{minute}}</view>
+            <view class="gray-1 size-24">分:秒</view>
+        </view>
+        <view class="time-info size-40">
+            <view class="time-count-wrap">
+                <view>{{nowCount}}</view>
+                <view class="gray-1 size-24">个</view>
+            </view>
+            <view class="ka-wrap">
+                <view>{{ka}}</view>
+                <view class="gray-1 size-24">卡</view>
+            </view>
+        </view>
     </view>
-<view class="btn-wrap" >
 
-<view class="btn" hover-class="hover">开始</view>
-
-</view>
+    <view class="time-wrap" wx:if='{{mode === 2}}'>
+        <view class="time">
+            <view >{{count}}</view>
+            <view class="gray-1 size-24">个</view>
+        </view>
+        <view class="time-info size-40">
+            <view class="time-count-wrap">
+                <view >{{nowTime}}</view>
+                <view class="gray-1 size-24">分:秒</view>
+            </view>
+            <view class="ka-wrap">
+                <view >{{ka}}</view>
+                <view class="gray-1 size-24">卡</view>
+            </view>
+        </view>
+    </view>
 
 </view>

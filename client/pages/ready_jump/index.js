@@ -3,6 +3,8 @@
 // mode =0 自由条
 // 1 计时条
 // 2技术跳
+import Storage from '../../utils/storage'
+import { compThrottled } from '../../utils/util';
 Page({
 
   /**
@@ -13,7 +15,47 @@ Page({
     mode:'',
     hour:'0',
     minute:'30',
-    count:100
+    count:100,
+    countArray:[
+      50,
+      100,
+      300,
+      500,
+      1000,
+      1500,
+      2000,
+      3000,
+      4000,
+      5000,
+    ]
+  },
+
+  bindPickerChange(e) {
+    const index = parseInt(e.detail.value);
+    var count = this.data.countArray[index];
+    this.setData({
+      count
+    })
+    Storage.count = count
+  },
+
+  bindTimeChange: function(e) {
+    let time = e.detail.value;
+    const hour = time.split(':')[0]
+    const minute = time.split(':')[1]
+    this.setData({
+      time,
+      hour,
+      minute,
+    })
+    Storage.hour = hour;
+    Storage.minute = minute;
+  },
+
+  _clickSubmit(){
+    wx.navigateTo({
+      url: '/pages/jump/index?mode='+this.data.mode,
+    })
   },
 
   /**
@@ -21,9 +63,17 @@ Page({
    */
   onLoad: function (options) {
     var index = parseInt(options.mode)
+    var count = Storage.count || 100
+    var hour = Storage.hour || 0
+    var minute = Storage.minute || 30
     this.setData({
-      mode:index
+      mode:index,
+      hour,
+      minute,
+      count
     })
+
+    this.clickSubmit = compThrottled(this._clickSubmit.bind(this))
   },
 
   /**
