@@ -2,7 +2,5 @@
   "navigationBarBackgroundColor": "#000000",
   "navigationBarTextStyle": "white",
   "navigationBarTitleText": "跳绳",
-  "usingComponents": {
-    "ec-canvas": "/ec-canvas/ec-canvas"
-  }
+  "usingComponents": {}
 }

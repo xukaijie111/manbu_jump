@@ -1,0 +1,55 @@
+/* pages/ready_jump/index.wxss */
+
+page{
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.device-name{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20rpx;
+}
+
+.content{
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 40%;
+  font-size: 60rpx;
+}
+
+.free{
+  font-style: italic;
+}
+
+.edit{
+  font-style: normal;
+  font-size: 28rpx;
+ padding:0rpx 30rpx;
+ background-color: green;
+ border-radius: 8rpx;
+ margin-top: 10rpx;
+}
+
+.time{
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  flex-direction: column; 
+}
+
+.unit{
+  font-style: normal;
+  font-size: 28rpx;
+  color: gray;
+}
+
+.btn{
+  position: fixed;
+  bottom: 100rpx;
+  left: 50%;
+  transform: translateX(-50%);
+
+}

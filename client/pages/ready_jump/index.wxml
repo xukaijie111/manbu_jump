@@ -1,0 +1,22 @@
+<!--pages/ready_jump/index.wxml-->
+<view class="wrap">
+  <view class="device-name">设备:{{name}}</view>
+
+  <view class="content">
+    <view wx:if='{{mode === 0}}' class="free">
+      畅享自由跳
+    </view>
+    <view wx:if='{{mode === 1}}' class="time">
+      <view>{{hour}}时{{minute}}分</view>
+      <view type="primary" size='mini' class="edit">编辑</view>
+    </view>
+    <view wx:if='{{mode === 2}}' class="free">
+      <view>{{count}}<text class="unit">个</text></view>
+      <view type="primary" size='mini' class="edit">编辑</view>
+
+    </view>
+  </view>
+
+  <button type="primary" class="btn">开始</button>
+
+</view>

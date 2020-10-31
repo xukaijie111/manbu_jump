@@ -3,6 +3,9 @@
 import * as echarts from '../../ec-canvas/echarts';
 const screenWidth = wx.getSystemInfoSync().screenWidth
 import moment from '../../moment/index.js'
+import {
+  compThrottled
+} from '../../utils/util'
 const app = getApp()
 
 var option = {
@@ -80,24 +83,63 @@ function initChart(canvas, width, height, dpr) {
 
 Page({
   data: {
+    todayCount:0,
     isLoad:false,
     screenWidth,
     ec: {
       onInit: initChart
-    }
+    },
+    lists:[
+      {
+        name:'次数',
+        value:0
+      },{
+        name:'时间',
+        value:0
+      },{
+        name:'卡路里',
+        value:0
+      }
+    ],
+    modeList:[
+      {
+        name:'自由跳',
+        description:'畅享自由玩',
+        url:'/images/free.png',
+        color:'#f14545'
+      },{
+        name:'计时跳',
+        description:'设置时间,挑战自己',
+        url:'/images/time.png',
+        color:'#f3f35d'
+      },{
+        name:'计数跳',
+        description:'规定次数,突破自己',
+        url:'/images/count.png',
+        color:'#9fef9f'
+      }
+    ]
   },
 
   onLoad: function () {
-    var len = 7;
+    this.clickMode = compThrottled(this._clickMode.bind(this))
+  //   var len = 7;
 
-    var xDate = [];
+  //   var xDate = [];
    
-   for (var i = len;i >= 0;i--) {
-     var startDate = moment();
-     xDate.push(startDate.subtract(i,'days').format('MM/DD'))
-   }
-   console.log('###date is ',xDate)
-    option.xAxis[0].data = xDate;
-    this.setData({isLoad:true})
+  //  for (var i = len;i >= 0;i--) {
+  //    var startDate = moment();
+  //    xDate.push(startDate.subtract(i,'days').format('MM/DD'))
+  //  }
+  //  console.log('###date is ',xDate)
+  //   option.xAxis[0].data = xDate;
+  //   this.setData({isLoad:true})
   },
+
+  _clickMode(e){
+    const index = e.currentTarget.dataset.index;
+    wx.navigateTo({
+      url: '/pages/ready_jump/index?mode='+index,
+    })
+  }
 })

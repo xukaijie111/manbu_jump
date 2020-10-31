@@ -1,10 +1,39 @@
 <!--index.wxml-->
-<view wx:if='{{isLoad}}'>
-   <view class="canvas-wrap">
-  <ec-canvas 
-        style="width:{{screenWidth}}px;height:100%"
-  id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}"></ec-canvas>
- </view>
+<view class="wrap">
+<view class="today-info-wrap">
+      <view class="title gray-1">今日数据</view>
+      <view class="count-wrap">
+            <view class="count green">{{todayCount}}</view>
+            <view class="gray-1 size-24">个</view>
+      </view>
 
+      <view class="other-wrap">
+            <view wx:for='{{lists}}' class="other-item">
+                  <view class="value white">{{item.value}}</view>
+                  <view class="gray-1 size-20">{{item.name}}</view>
+            </view>
+
+      </view>
+</view>
+
+<view class="mode-wrap">
+      <view class="mode-item-wrap" 
+      catchtap='clickMode'
+      data-index='{{index}}'
+      wx:for='{{modeList}}' hover-class="hover">
+          <view class="left">
+                  <image class="icon" src='{{item.url}}' style='background-color:{{item.color}}'></image>
+                  <view class="mode-info-wrap">
+                        <view class="mode-name">{{item.name}}</view>
+                              <view class='gray-1 size-24'>{{item.description}}</view>
+                  </view>
+          </view>  
+           <view class="right">
+                  <image src='/images/arrow.png' class="arrow"></image>
+
+           </view> 
+      </view>
+
+</view>
 
 </view>

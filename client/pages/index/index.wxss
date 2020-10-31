@@ -1,10 +1,101 @@
 /**index.wxss**/
-.canvas-wrap{
-    box-sizing: border-box;
-  width: 700rpx;
+page{
+  background-color: #000000;
+}
+
+.title{
+  height: 100rpx;
+  font-size: 32rpx;
+  align-items: center;
+  display: flex;
+}
+
+.today-info-wrap{
   height: 500rpx;
-  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.count{
+  font-size: 150rpx;
+  line-height: 140rpx;
+}
+.count-wrap{
+  height: 300rpx;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.other-wrap{
+  flex: 1;
+  height: 0rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.other-item{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-direction: column;
+}
+
+.value{
+  font-size: 36rpx;
+}
+.mode-wrap{
+  margin-top: 40rpx;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0rpx 30rpx;
+ 
+
+}
+.mode-item-wrap{
+    height: 200rpx;
+    margin-bottom: 30rpx;
+    background-color: rgba(33, 32, 32, 0.5);
+    color: #ffffff;
+    border-radius: 16rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0rpx 30rpx;
+}
+
+.hover{
+  opacity: 0.7;
+}
+
+.left{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.icon{
+  padding: 20rpx 20rpx;
+  width: 50rpx;
+  height: 50rpx;
+  border-radius: 50%;
+  margin-right: 30rpx;
+}
+
+.mode-name{
+  color: #ffffff;
+  font-size: 28rpx;
+  margin-bottom: 5rpx;
+}
+
+.arrow{
+  width: 30rpx;
+  height: 30rpx;
+  /* padding: 20rpx 20rpx;
+  background-color: gray;
+  border-radius: 50%; */
 }

@@ -1,0 +1,15 @@
+<!--pages/search-device/index.wxml-->
+<view class="wrap"> 
+  <view class="title"> 连接跳绳</view>
+  <view class="sub-title">正在搜索跳绳设备...</view>
+
+  <view class="tip-wrap">
+    <view>1、请确保设备开机</view>
+    <view>2、请确保设备未被其他终端连接</view>
+    <view>3、请确认手机开启蓝牙功能</view>
+  </view>
+
+  <view class="col-sm-2">
+      <view class="sp sp-wave"></view>
+    </view>
+</view>
