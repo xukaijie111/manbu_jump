@@ -32,7 +32,7 @@ var userSchema = new Schema({
 var userModel = mongoose.model('user',userSchema,'user');
 
 var deviceSchema = new Schema({
-  id:{type:String},
+  deviceId:{type:String},
   userId:{type:String}, //userid
   isDelete:{type:Boolean}, //是否解绑
 }, {timestamps: {createdAt: 'created', updatedAt: 'updated'}});
@@ -43,9 +43,11 @@ var deviceModel = mongoose.model('device',deviceSchema,'device');
 var gameSchema = new Schema({
     startTime:{type:String},
     endTime:{type:String},
-    turnCount:{type:Number},
-    id:{type:Number}, 
-    
+    count:{type:Number},
+    gameId:{type:Number}, // gameId
+    ka:{type:Number}, // 卡路里
+    deviceId:{type:String},// 设备deviceId
+    userId:{type:String}
 }, {timestamps: {createdAt: 'created', updatedAt: 'updated'}});
 
 

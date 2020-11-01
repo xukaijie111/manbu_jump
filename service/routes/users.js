@@ -13,7 +13,7 @@ var creatingUser = {};
 function createUser(openId,res){
   var userId = Util.generateUserId();
   if (creatingUser[userId]){
-      createUser(openId)
+      createUser(openId,res)
       return;
   }
   creatingUser[userId] = true;
@@ -29,7 +29,7 @@ function createUser(openId,res){
 
       if (ret && ret.length){
           delete creatingUser[userId];
-          createUser(openId)
+          createUser(openId,res)
           return
       }
 
