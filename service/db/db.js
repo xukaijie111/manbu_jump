@@ -41,8 +41,8 @@ var deviceModel = mongoose.model('device',deviceSchema,'device');
 
 
 var gameSchema = new Schema({
-    startTime:{type:String},
-    endTime:{type:String},
+    startTime:{type:Date},
+    endTime:{type:Date},
     count:{type:Number},
     gameId:{type:Number}, // gameId
     ka:{type:Number}, // 卡路里
