@@ -45,8 +45,9 @@ class Ble{
     var countH = dataView.getUint8(3);
     var timeL = dataView.getUint8(4);
     var timeH = dataView.getUint8(5);
-    var time = timeH?timeH+255+timeL:timeL
-    var count = countH ? countH + 255 + countL : countL
+    var time = timeH?timeH<<8 + timeL:timeL
+    var count = countH ? countH<< 8 + countL : countL
+    console.log('#####countLcountH',countL,countH,timeL,timeH)
     return{
       count,
       time
@@ -125,8 +126,8 @@ class Ble{
       clearInterval(this.timer);
       this.timer = null;
     }
-
-    this.timer = setInterval(()=>{
+    let self = this;
+    function get(){
       wx.getBluetoothDevices({
         success: (res) => {
           console.log(res.devices)
@@ -146,7 +147,7 @@ class Ble{
           })
           var lists = filterDevices.filter((f) => {
             let uuidsList = [];
-            this.lists.forEach((l) => {
+            self.lists.forEach((l) => {
               uuidsList = uuidsList.concat(l.advertisServiceUUIDs)
             })
             const index = uuidsList.indexOf(f.advertisServiceUUIDs[0]);
@@ -157,9 +158,13 @@ class Ble{
             }
           })
 
-          this.lists = this.lists.concat(lists)
+          self.lists = self.lists.concat(lists)
         }
       })
+    }
+    get();
+    this.timer = setInterval(()=>{
+      get();
     },2000)
    
   }
@@ -204,6 +209,7 @@ class Ble{
   }
 
   sendMode(deviceId,mode,options){
+    console.log('####set mode ',mode,options)
     var buffer = new ArrayBuffer(7);
     var dataview = new DataView(buffer)
     dataview.setUint8(0,0xf3)
@@ -216,29 +222,28 @@ class Ble{
       var hour = parseInt(options.hour);
       var minute = parseInt(options.minute);
       var seconds = hour*60*60+minute*60;
-      let high = 0;
-      let low = seconds;
-      if (seconds > 255) {
-        high = seconds - 255
-        low = 255
-      }
+      console.log('##seconds is ',seconds)
+      let low = seconds&0xff;
+      let high = seconds>>8;
+     
+     
+      console.log('###high low is ',high,low)
+      console.log()
       dataview.setUint8(1,1)
-      dataview.setUint8(2,low)
-      dataview.setUint8(3,high)
-      dataview.setUint16(4,seconds)
+      dataview.setUint16(2,0) // count
+  
+      dataview.setUint8(4,low) //time
+      dataview.setUint8(5,high)
       dataview.setUint8(6,0xf3+1+seconds)
-    }else if(mode === 2) {
+    }else if(mode === 2) { // 计数跳
       var count = options.count;
-      let high = 0;
-      let low = seconds;
-      if (count > 255) {
-        high = seconds - 255
-        low = 255
-      }
+      let low = count&0xff;
+      let high = count>>8;
+   
       dataview.setUint8(1,2)
-      dataview.setUint8(2,low)
+      dataview.setUint8(2,low) //count
       dataview.setUint8(3,high)
-      dataview.setUint16(4,0)
+      dataview.setUint16(4,0) //time
       dataview.setUint8(6,0xf3+2+count)
     }
 

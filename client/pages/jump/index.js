@@ -2,6 +2,9 @@
 import Storage from '../../utils/storage'
 import Ble from '../../utils/ble'
 import moment from '../../moment/index'
+import {
+  formatNumber
+} from '../../utils/util'
 Page({
   data:{
     mode:'',
@@ -13,11 +16,11 @@ Page({
     nowTime:'00:00:00'
   },
   changeDate(seconds) {
+    console.log('###seconds is ',seconds)
     var data = moment.duration(seconds, 'seconds')
 
     // 案例：时分秒 00:00:00
-    return [data.hours(), data.minutes(), data.seconds()].join(":")
-
+    return [data.hours(), data.minutes(), data.seconds()].map(formatNumber).join(":")
   },
 
   onCharacterValueChange(){
@@ -34,7 +37,7 @@ Page({
     const deviceId =this.data.deviceId
     const timer = setInterval(() => {
       Ble.sendReadDataCmd(deviceId);
-    }, 2000);
+    }, 1000);
     this.setData({timer})
   },
 

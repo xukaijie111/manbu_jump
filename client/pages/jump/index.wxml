@@ -3,8 +3,8 @@
 
     <view class="time-wrap" wx:if='{{mode === 1}}'>
         <view class="time">
-            <view >{{hour}}:{{minute}}</view>
-            <view class="gray-1 size-24">分:秒</view>
+            <view >{{nowTime}}</view>
+            <view class="gray-1 size-24">时:分:秒</view>
         </view>
         <view class="time-info size-40">
             <view class="time-count-wrap">
@@ -20,7 +20,7 @@
 
     <view class="time-wrap" wx:if='{{mode === 2}}'>
         <view class="time">
-            <view >{{count}}</view>
+            <view >{{count-nowCount>0?count-nowCount:0}}</view>
             <view class="gray-1 size-24">个</view>
         </view>
         <view class="time-info size-40">

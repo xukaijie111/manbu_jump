@@ -1,6 +1,6 @@
 <!--pages/ready_jump/index.wxml-->
 <view class="wrap">
-  <view class="device-name">设备:{{name}}</view>
+  <view class="device-name" wx:if='{{deviceId}}'>设备:{{name}}</view>
 
   <view class="content">
     <view wx:if='{{mode === 0}}' class="free">
@@ -21,6 +21,8 @@
     </view>
   </view>
 
-  <button type="primary" class="btn" catchtap='clickSubmit'>开始</button>
-
+  <view class="btn-wrap">
+    <button type="primary" class="btn"  disabled = '{{!deviceId}}' catchtap='clickSubmit'>开始</button>
+    <view wx:if='{{!deviceId}}' class="empty" catchtap='connectClick'>还未连接设备，去连接 >> </view>
+  </view>
 </view>

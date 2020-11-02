@@ -5,13 +5,15 @@
 // 2技术跳
 import Storage from '../../utils/storage'
 import { compThrottled } from '../../utils/util';
+import Ble from '../../utils/ble'
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    name:'JUMP_S10001',
+    deviceId:'',
+    name:'',
     mode:'',
     hour:'0',
     minute:'30',
@@ -53,27 +55,46 @@ Page({
   },
 
   _clickSubmit(){
+    const deviceId = this.data.deviceId;
+    const mode = this.data.mode;
     wx.navigateTo({
-      url: '/pages/jump/index?mode='+this.data.mode,
+      url: `/pages/jump/index?mode=${mode}&deviceId=${deviceId}`
     })
+  },
+
+  _connectClick(){
+    wx.navigateTo({
+      url: '/pages/search-device/index?mode='+ this.data.mode,
+   })
+  },
+
+  getConnectDevice(){
+    const lists = Ble.lists;
+    if (lists.length) {
+      this.setData({
+        deviceId:lists[0].deviceId,
+        name:lists[0].name
+      })
+    }
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var index = parseInt(options.mode)
+    var mode = parseInt(options.mode)
     var count = Storage.count || 100
     var hour = Storage.hour || 0
     var minute = Storage.minute || 30
     this.setData({
-      mode:index,
+      mode:mode,
       hour,
       minute,
       count
     })
 
     this.clickSubmit = compThrottled(this._clickSubmit.bind(this))
+    this.connectClick = compThrottled(this._connectClick.bind(this))
   },
 
   /**
@@ -87,7 +108,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getConnectDevice();
   },
 
   /**
