@@ -24,11 +24,11 @@ Page({
     },
     timeData:{
       count:0,
-      timeStr
+      timeStr:0
     },
     countData: {
       count: 0,
-      timeStr
+      timeStr:0
     },
     ka:0,
 

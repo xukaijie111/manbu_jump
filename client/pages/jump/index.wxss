@@ -21,7 +21,6 @@ page{
 .btn-group{
   height: 200rpx;
   display: flex;
-  align-items: center;
   justify-content: center
 }
 
@@ -81,3 +80,12 @@ page{
   align-items:center;
   font-size: 160rpx;
 }
+
+.start-img{
+  width: 150rpx;
+  height: 150rpx;
+  padding: 20rpx 20rpx;
+  box-sizing: content-box;
+  background: green
+}
+

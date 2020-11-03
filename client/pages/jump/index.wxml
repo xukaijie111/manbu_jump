@@ -55,11 +55,16 @@
     </view>
 
     <view class="btn-group">
-        <view wx:if='{{status === 0}}'></view>
-        <view wx:if='{{status === 1}}'></view>
-        <view wx:if='{{status === 2}}'></view>
+        <block wx:if='{{status === 0}}'>
+            <view class="flex-column start-wrap">
+              <image src='/images/start.png' class="start-img" hover-class='hover'></image>
+              <view class="color-999 size-24">开始</view>
+            </view>
+        </block>
+        <block wx:if='{{status === 1}}'></block>
+        <block wx:if='{{status === 2}}'></block>
 
-        <view wx:if='{{status === 3}}'></view>
+        <block wx:if='{{status === 3}}'></block>
     </view>
 
 </view>
