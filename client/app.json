@@ -31,12 +31,6 @@
         "selectedIconPath": "images/home-active.png"
       },
       {
-        "pagePath": "pages/sport/index",
-        "text": "运动",
-        "iconPath": "images/sport.png",
-        "selectedIconPath": "images/sport-active.png"
-      },
-      {
         "pagePath": "pages/user/index",
         "text": "我的",
         "iconPath": "images/user.png",

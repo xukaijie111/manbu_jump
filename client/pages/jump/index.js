@@ -3,7 +3,7 @@ import Storage from '../../utils/storage'
 import Ble from '../../utils/ble'
 import moment from '../../moment/index'
 import API from '../../request/api.js'
-var count = 0;
+var lastCount = 0;
 import {
   formatNumber,
   compThrottled
@@ -22,7 +22,7 @@ Page({
     count:0,
     freeData:{
       count:0,
-      timeStr:''
+      timeStr:'00:00:00'
     },
     timeData:{
       count:0,
@@ -33,14 +33,16 @@ Page({
       timeStr:0
     },
     ka:0,
-
+    nowCount:0,
     gameId:''
   },
 
   updateToServer(){
-    count++;
+   // count++;
     if (!this.data.gameId) return
-  //  const count = this.data.nowCount;
+    const count = this.data.nowCount;
+    if (count === lastCount) return;
+    lastCount = count;
     API.updateGame({
       gameId:this.data.gameId,
       count,
@@ -57,6 +59,9 @@ Page({
   updateViewData(value){
     const mode = this.data.mode;
     const timeStr = this.changeDate(value.time);
+    this.setData({
+      nowCount:value.count
+    })
     switch(mode) {
       case 0:
         let freeData = this.data.freeData;
@@ -82,10 +87,7 @@ Page({
   onCharacterValueChange(){
     const deviceId = this.data.deviceId;
     Ble.listenCharacterValue(deviceId,(value)=>{
-      this.setData({
-        nowCount:value.count,
-        nowTime:this.changeDate(value.time)
-      })
+      this.updateViewData(value)
       this.updateToServer();
     })
   },
@@ -93,8 +95,8 @@ Page({
   sendCmd(){
     const deviceId =this.data.deviceId
     const timer = setInterval(() => {
-     // Ble.sendReadDataCmd(deviceId);
-      this.updateToServer();
+      Ble.sendReadDataCmd(deviceId);
+      //this.updateToServer();
     }, 1000);
     this.setData({timer})
   },
@@ -110,7 +112,7 @@ Page({
 
   startGame(){
     API.createGame({
-      deviceId:'22',
+      deviceId:this.data.deviceId,
       mode:this.data.mode,
     })
     .then((res)=>{
@@ -141,8 +143,7 @@ Page({
 
     Ble.sendMode(deviceId, mode, option)
       .then(() => {
-        this.onCharacterValueChange()
-        this.sendCmd();
+        
       }, () => {
         wx.showModal({
           title: '提示',
@@ -152,6 +153,7 @@ Page({
   },
 
   clickStart(){
+    this.onCharacterValueChange()
     this.startGame();
   },
 
@@ -171,7 +173,7 @@ Page({
       hour,
       minute,
       count,
-      deviceId:'222'
+      deviceId,
     })
     
     this.setBleMode();

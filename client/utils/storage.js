@@ -5,6 +5,9 @@ var _Storage = {
   },
   idToken: {
     sync: true
+  },
+  userId:{
+    sync:true
   }
 }
 

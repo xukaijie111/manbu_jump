@@ -1,6 +1,6 @@
 
 
-export const BASEAPIURL = 'http://localhost:3000'
+export const BASEAPIURL = 'http://192.168.0.104:3000'
 
 
 

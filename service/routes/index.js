@@ -28,7 +28,7 @@ router.post('/get_today_info',(req,res,next)=>{
   gameModel.find({ $and: [{userId},{ startTime: { $gt: startTime } }, { endTime: { $lt: endTime } }] }) //实现第一种情况
   .select("-_id count ka endTime startTime")
   .exec((err,list)=>{
-    console.log('####err')
+    console.log('####err',list)
     if (err) {
       return res.json({code:-1,message:'查询错误'})
     }
