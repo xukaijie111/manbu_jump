@@ -222,11 +222,12 @@ class Ble{
         high = seconds - 255
         low = 255
       }
+      let sum = (0xf3 + 1 + seconds)&0xff
       dataview.setUint8(1,1)
       dataview.setUint8(2,low)
       dataview.setUint8(3,high)
       dataview.setUint16(4,seconds)
-      dataview.setUint8(6,0xf3+1+seconds)
+      dataview.setUint8(6, sum)
     }else if(mode === 2) {
       var count = options.count;
       let high = 0;
@@ -235,11 +236,12 @@ class Ble{
         high = seconds - 255
         low = 255
       }
+      let sum = (0xf3 + 2 + count) & 0xff
       dataview.setUint8(1,2)
       dataview.setUint8(2,low)
       dataview.setUint8(3,high)
       dataview.setUint16(4,0)
-      dataview.setUint8(6,0xf3+2+count)
+      dataview.setUint8(6, sum)
     }
 
     return new Promise((resolve,reject)=>{
