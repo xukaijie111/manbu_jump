@@ -1,14 +1,14 @@
 
 <view class="wrap">
-
+    <view class="content">
     <view class="time-wrap" wx:if='{{mode === 1}}'>
         <view class="time">
-            <view >{{nowTime}}</view>
+            <view >{{timeData.timeStr}}</view>
             <view class="gray-1 size-24">时:分:秒</view>
         </view>
         <view class="time-info size-40">
             <view class="time-count-wrap">
-                <view>{{nowCount}}</view>
+                <view>{{timeData.count}}</view>
                 <view class="gray-1 size-24">个</view>
             </view>
             <view class="ka-wrap">
@@ -20,12 +20,12 @@
 
     <view class="time-wrap" wx:if='{{mode === 2}}'>
         <view class="time">
-            <view >{{count-nowCount>0?count-nowCount:0}}</view>
+            <view >{{countData.count}}</view>
             <view class="gray-1 size-24">个</view>
         </view>
         <view class="time-info size-40">
             <view class="time-count-wrap">
-                <view >{{nowTime}}</view>
+                <view >{{countData.timeStr}}</view>
                 <view class="gray-1 size-24">分:秒</view>
             </view>
             <view class="ka-wrap">
@@ -37,11 +37,11 @@
 
     <view class="free-wrap" wx:if='{{mode === 0}}'>
         <view class="time-2">
-            <view >{{nowTime}}</view>
-            <view class="gray-1 size-24">分:秒</view>
+            <view >{{freeData.timeStr}}</view>
+           <view class="gray-1 size-24">时:分:秒</view>
         </view>
         <view class="time-2 base">
-            <view >{{nowCount}}</view>
+            <view >{{freeData.count}}</view>
             <view class="gray-1 size-24">个</view>
         </view>
       
@@ -50,6 +50,16 @@
             <view class="gray-1 size-24">卡</view>
         </view>
       
+    </view>
+
+    </view>
+
+    <view class="btn-group">
+        <view wx:if='{{status === 0}}'></view>
+        <view wx:if='{{status === 1}}'></view>
+        <view wx:if='{{status === 2}}'></view>
+
+        <view wx:if='{{status === 3}}'></view>
     </view>
 
 </view>

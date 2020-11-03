@@ -32,6 +32,7 @@ function createGame(option,res){
       }
 
       var condition = {
+          startTime:new DataCue(),
           id:gameId,
           ...option
       }
@@ -61,6 +62,23 @@ router.post('/create_game',(req,res,next)=>{
   }
 
   return createGame(body,res)
+
+})
+
+router.post('/end_game',(req,res,next)=>{
+
+  var body = req.body;
+  var gameId = body.gameId;
+  var userId = body.userId;
+  if (!gameId || !userId) {
+    return res.json({code:-1,message:'参数错误'})
+  }
+
+  gameModel.updateOne({gameId},{
+    endTime:new Date()
+  },(err)=>{
+   return res.json({code:0})
+  })
 
 })
 
