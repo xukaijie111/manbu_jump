@@ -4,6 +4,8 @@ import * as echarts from '../../ec-canvas/echarts';
 const screenWidth = wx.getSystemInfoSync().screenWidth
 import moment from '../../moment/index.js'
 import Ble from '../../utils/ble'
+import API from '../../request/api.js'
+import Storage from '../../utils/storage.js'
 import {
   compThrottled
 } from '../../utils/util'
@@ -122,8 +124,37 @@ Page({
     ]
   },
 
+  getStastic(){
+    API.getTodayInfo()
+    .then((res)=>{
+      var lists = this.data.lists;
+      lists[0].value = res.jumpCount;
+      lists[1].value = res.time;
+      lists[2].value = res.ka
+      this.setData({
+        todayCount:res.count,
+        lists
+      })
+    })
+  },
+
   onLoad: function () {
     this.clickMode = compThrottled(this._clickMode.bind(this))
+
+    // 登录
+    wx.login({
+      success: res => {
+        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+        console.log('###login res is ', res)
+        API.userLogin({
+          code: res.code
+        })
+          .then((res) => {
+            Storage.userId = res.userId
+            this.getStastic()
+          })
+      }
+    })
   //   var len = 7;
 
   //   var xDate = [];

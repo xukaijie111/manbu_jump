@@ -84,8 +84,21 @@ page{
 .start-img{
   width: 150rpx;
   height: 150rpx;
-  padding: 20rpx 20rpx;
-  box-sizing: content-box;
-  background: green
 }
 
+.gift-wrap{
+  position: fixed;
+  right: 30rpx;
+  bottom: 300rpx;
+}
+
+.gift{
+  width: 100rpx;
+  height: 100rpx;
+  border-radius: 50%
+}
+
+.gift-text{
+  position: absolute;
+  
+}

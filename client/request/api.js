@@ -12,6 +12,12 @@ class API extends baseRequest {
       },
       {
         apiName: 'updateGame', url:"/game/update_game"
+      },
+      {
+        apiName: 'endGame', url: '/game/end_game', showLoading: true, loadContent: '正在保存数据...'
+      },
+      {
+        apiName: 'getTodayInfo', url:'/index/get_today_info'
       }
     ]
     this.initFuncs();

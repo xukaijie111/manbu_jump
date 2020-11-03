@@ -32,8 +32,8 @@ function createGame(option,res){
       }
 
       var condition = {
-          startTime:new DataCue(),
-          id:gameId,
+          startTime:new Date(),
+          gameId:gameId,
           ...option
       }
       gameModel.create(condition,  (err, doc) => {
@@ -91,13 +91,16 @@ router.post('/update_game',(req,res,next) => {
     return res.json({code:-1,message:'参数错误'})
   }
 
-  gameModel.findOne({id:gameId})
+  gameModel.findOne({gameId})
   .exec((err,ret)=>{
     if (err) {
       return res.json({code:-2,message:'操作数据库错误'})
     }
-    
-    gameModel.updateOne({gameId:gameId},body,(err)=>{
+    if (ret.endTime) return res.json({code:0})
+   var data = {
+     count:body.count?parseInt(body.count):0,
+   }
+    gameModel.updateOne({gameId:gameId},data,(err)=>{
       if (err) {
         return res.json({code:-2,message:'操作数据库错误'})
       }

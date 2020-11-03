@@ -57,14 +57,23 @@
     <view class="btn-group">
         <block wx:if='{{status === 0}}'>
             <view class="flex-column start-wrap">
-              <image src='/images/start.png' class="start-img" hover-class='hover'></image>
+              <image src='/images/start.png' class="start-img"  catchtap='clickStart' hover-class='hover'></image>
               <view class="color-999 size-24">开始</view>
             </view>
         </block>
-        <block wx:if='{{status === 1}}'></block>
+        <block wx:if='{{status === 1}}'>
+           <view class="flex-column start-wrap">
+              <image src='/images/start.png' class="start-img"  catchtap='clickEnd' hover-class='hover'></image>
+              <view class="color-999 size-24">结束</view>
+            </view>
+        </block>
         <block wx:if='{{status === 2}}'></block>
 
         <block wx:if='{{status === 3}}'></block>
+    </view>
+
+    <view class="gift-wrap">
+      <image src='/images/jump.gif' class="gift"></image>
     </view>
 
 </view>

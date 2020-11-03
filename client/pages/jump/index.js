@@ -3,8 +3,10 @@ import Storage from '../../utils/storage'
 import Ble from '../../utils/ble'
 import moment from '../../moment/index'
 import API from '../../request/api.js'
+var count = 0;
 import {
-  formatNumber
+  formatNumber,
+  compThrottled
 } from '../../utils/util'
 
 const STATUS_NO_START = 0;
@@ -36,9 +38,10 @@ Page({
   },
 
   updateToServer(){
+    count++;
     if (!this.data.gameId) return
-    const count = this.data.nowCount;
-    Ble.updateGame({
+  //  const count = this.data.nowCount;
+    API.updateGame({
       gameId:this.data.gameId,
       count,
     })
@@ -90,21 +93,36 @@ Page({
   sendCmd(){
     const deviceId =this.data.deviceId
     const timer = setInterval(() => {
-      Ble.sendReadDataCmd(deviceId);
+     // Ble.sendReadDataCmd(deviceId);
+      this.updateToServer();
     }, 1000);
     this.setData({timer})
   },
 
+  endGame(){
+    API.endGame({
+      gameId:this.data.gameId
+    });
+    setTimeout(()=>{
+      this.destroyTimer();
+    },1000)
+  },
+
   startGame(){
     API.createGame({
-      deviceId:'22'
+      deviceId:'22',
+      mode:this.data.mode,
     })
     .then((res)=>{
+      this.sendCmd();
+      this.setData({
+        status:STATUS_DOING
+      })
       const gameId = res.gameId;
       this.setData({
         gameId
       })
-      this.setBleMode();
+      //this.setBleMode();
     },()=>{
       this.setBleMode();
     })
@@ -112,6 +130,7 @@ Page({
 
   setBleMode(){
     let mode = this.data.mode;
+    const deviceId  = this.data.deviceId;
     var option = {};
     if (mode === 1) {
       option.hour = hour;
@@ -132,7 +151,16 @@ Page({
       })
   },
 
+  clickStart(){
+    this.startGame();
+  },
+
+  _clickEnd(){
+    this.endGame();
+  },
+
   onLoad(options){
+    this.clickEnd = compThrottled(this._clickEnd.bind(this))
     var mode = parseInt(options.mode)
     const deviceId = options.deviceId
     var count = Storage.count || 100
@@ -147,13 +175,18 @@ Page({
     })
     
     this.setBleMode();
+
   },
-  onUnload(){
+
+  destroyTimer(){
     if (this.data.timer) {
       clearInterval(this.data.timer)
       this.setData({
-        timer:null
+        timer: null
       })
     }
+  },
+  onUnload(){
+    this.destroyTimer();
   }
 })

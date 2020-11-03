@@ -58,7 +58,7 @@ export default class RequestBaseComponent {
           }
         },
         fail: (err) => {
-          console.log(res, param);
+          console.log(err);
           wx.showModal({
             title: '提示',
             content: '请求发生错误,可能是网络断开链接，请检查网络',
