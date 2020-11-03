@@ -138,18 +138,22 @@ Page({
   },
 
   _clickMode(e){
-    const lists = Ble.lists;
     const index = e.currentTarget.dataset.index;
+    wx.navigateTo({
+      url: `/pages/ready_jump/index?mode=${index}`,
+    })
 
-    if (!lists.length) {
-      wx.navigateTo({
-        url: '/pages/search-device/index?mode='+index,
-      })
-    }else{
-      wx.navigateTo({
-        url: '/pages/ready_jump/index?mode='+index,
-      })
-    }
+    // if (!lists.length) {
+    //   wx.navigateTo({
+    //     url: '/pages/search-device/index?mode='+index,
+    //   })
+    // }else{
+    //   const deviceId = lists[0].deviceId;
+    //   console.log('#EEEdeviceid is ',deviceId)
+    //   wx.navigateTo({
+    //     url: `/pages/ready_jump/index?mode=${index}&deviceId='${deviceId}`,
+    //   })
+    // }
     
   }
 })

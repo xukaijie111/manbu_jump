@@ -50,10 +50,18 @@ page{
   color: gray;
 }
 
-.btn{
+.btn-wrap{
   position: fixed;
   bottom: 100rpx;
   left: 50%;
   transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.empty{
+  font-size: 28rpx;
+  color: #ab5555;
+  margin-top: 10rpx;
 }
