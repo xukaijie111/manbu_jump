@@ -3,36 +3,36 @@ import {
   SCAN_PARAMETERS
 } from './const.js'
 
-class Ble{
-  constructor(){
+class Ble {
+  constructor() {
     this.isStart = false;
     this.lists = [];
     this.listenBleState();
   }
 
-  listenBleState(){
-    wx.onBLEConnectionStateChange( (res) =>{
-        const deviceId = res.deviceId;
+  listenBleState() {
+    wx.onBLEConnectionStateChange((res) => {
+      const deviceId = res.deviceId;
       const connected = res.connected
-      const deviceIdLists = this.lists.map((l)=>{return l.deviceId})
+      const deviceIdLists = this.lists.map((l) => { return l.deviceId })
       const index = deviceIdLists.indexOf(deviceId)
       if (index !== -1 && !connected) {
-        this.lists.splice(index,1)
+        this.lists.splice(index, 1)
       }
 
     })
   }
 
- connectDevice(deviceId){
-    return new Promise((resolve,reject)=>{
+  connectDevice(deviceId) {
+    return new Promise((resolve, reject) => {
       wx.createBLEConnection({
         deviceId,
         success: (res) => {
           console.log('####connect suc')
           resolve();
         },
-        fail:(err)=>{
-          console.log('###connect fail',err)
+        fail: (err) => {
+          console.log('###connect fail', err)
           reject();
         }
       })
@@ -45,16 +45,17 @@ class Ble{
     var countH = dataView.getUint8(3);
     var timeL = dataView.getUint8(4);
     var timeH = dataView.getUint8(5);
-    var time = timeH?timeH+255+timeL:timeL
-    var count = countH ? countH + 255 + countL : countL
-    return{
+    var time = timeH ? timeH << 8 + timeL : timeL
+    var count = countH ? countH << 8 + countL : countL
+    console.log('#####countLcountH', countL, countH, timeL, timeH)
+    return {
       count,
       time
     }
   }
 
- // 监听计数的值
-  listenCharacterValue(deviceId,callback){
+  // 监听计数的值
+  listenCharacterValue(deviceId, callback) {
     wx.notifyBLECharacteristicValueChange({
       deviceId: deviceId,
       serviceId: SCAN_PARAMETERS.uuid,
@@ -75,58 +76,58 @@ class Ble{
     })
   }
 
-  openAdapter(){
-    return new Promise((resolve,reject)=>{
+  openAdapter() {
+    return new Promise((resolve, reject) => {
       wx.openBluetoothAdapter({
-        success: function(res) {
+        success: function (res) {
           console.log('###open adapter suc')
           resolve()
         },
-        fail:(err)=>{
-          console.log('###open adapter fail',err)
+        fail: (err) => {
+          console.log('###open adapter fail', err)
           reject();
         }
       })
     })
   }
 
-  startDiscoveryBleDevice(){
-    return new Promise((resolve,reject)=>{
+  startDiscoveryBleDevice() {
+    return new Promise((resolve, reject) => {
       wx.startBluetoothDevicesDiscovery({
         success: (res) => {
           console.log('###startBluetoothDevicesDiscovery suc')
-            resolve();
+          resolve();
         },
-        fail:(err) =>{
-          console.log('###startBluetoothDevicesDiscovery fail',err)
+        fail: (err) => {
+          console.log('###startBluetoothDevicesDiscovery fail', err)
 
           reject();
         }
       })
     })
-    
+
   }
 
-  stopDiscoverBleDevice(){
+  stopDiscoverBleDevice() {
     if (this.timer) {
       clearInterval(this.timer)
       this.timer = null;
     }
     wx.stopBluetoothDevicesDiscovery({
-      success: function(res) {},
-      fail:(err)=>{
-        console.log('####stopBluetoothDevicesDiscovery',err)
+      success: function (res) { },
+      fail: (err) => {
+        console.log('####stopBluetoothDevicesDiscovery', err)
       }
     })
   }
 
-  getBleDevice(){
+  getBleDevice() {
     if (this.timer) {
       clearInterval(this.timer);
       this.timer = null;
     }
-
-    this.timer = setInterval(()=>{
+    let self = this;
+    function get() {
       wx.getBluetoothDevices({
         success: (res) => {
           console.log(res.devices)
@@ -146,7 +147,7 @@ class Ble{
           })
           var lists = filterDevices.filter((f) => {
             let uuidsList = [];
-            this.lists.forEach((l) => {
+            self.lists.forEach((l) => {
               uuidsList = uuidsList.concat(l.advertisServiceUUIDs)
             })
             const index = uuidsList.indexOf(f.advertisServiceUUIDs[0]);
@@ -157,19 +158,23 @@ class Ble{
             }
           })
 
-          this.lists = this.lists.concat(lists)
+          self.lists = self.lists.concat(lists)
         }
       })
-    },2000)
-   
+    }
+    get();
+    this.timer = setInterval(() => {
+      get();
+    }, 2000)
+
   }
 
-  async findBleDevices(){
-    try{
-        await this.openAdapter();
-        await this.startDiscoveryBleDevice();
-        this.getBleDevice();
-    }catch(err){
+  async findBleDevices() {
+    try {
+      await this.openAdapter();
+      await this.startDiscoveryBleDevice();
+      this.getBleDevice();
+    } catch (err) {
 
     }
   }
@@ -203,58 +208,57 @@ class Ble{
     })
   }
 
-  sendMode(deviceId,mode,options){
+  sendMode(deviceId, mode, options) {
+    console.log('####set mode ', mode, options)
     var buffer = new ArrayBuffer(7);
     var dataview = new DataView(buffer)
-    dataview.setUint8(0,0xf3)
+    dataview.setUint8(0, 0xf3)
     if (mode === 0) {
-      dataview.setUint8(1,0)
-      dataview.setUint16(2,0)
-      dataview.setUint16(4,0)
-      dataview.setUint8(6,0xf3)
-    }else if (mode === 1) { //时间跳
+      dataview.setUint8(1, 0)
+      dataview.setUint16(2, 0)
+      dataview.setUint16(4, 0)
+      dataview.setUint8(6, 0xf3)
+    } else if (mode === 1) { //时间跳
       var hour = parseInt(options.hour);
       var minute = parseInt(options.minute);
-      var seconds = hour*60*60+minute*60;
-      let high = 0;
-      let low = seconds;
-      if (seconds > 255) {
-        high = seconds - 255
-        low = 255
-      }
-      let sum = (0xf3 + 1 + seconds)&0xff
-      dataview.setUint8(1,1)
-      dataview.setUint8(2,low)
-      dataview.setUint8(3,high)
-      dataview.setUint16(4,seconds)
+      var seconds = hour * 60 * 60 + minute * 60;
+      console.log('##seconds is ', seconds)
+      let low = seconds & 0xff;
+      let high = seconds >> 8;
+
+
+      console.log('###high low is ', high, low)
+      let sum = (0xf3+1+seconds) & 0xff
+      dataview.setUint8(1, 1)
+      dataview.setUint16(2, 0) // count
+
+      dataview.setUint8(4, low) //time
+      dataview.setUint8(5, high)
       dataview.setUint8(6, sum)
-    }else if(mode === 2) {
+    } else if (mode === 2) { // 计数跳
       var count = options.count;
-      let high = 0;
-      let low = seconds;
-      if (count > 255) {
-        high = seconds - 255
-        low = 255
-      }
+      let low = count & 0xff;
+      let high = count >> 8;
+
       let sum = (0xf3 + 2 + count) & 0xff
-      dataview.setUint8(1,2)
-      dataview.setUint8(2,low)
-      dataview.setUint8(3,high)
-      dataview.setUint16(4,0)
-      dataview.setUint8(6, sum)
+      dataview.setUint8(1, 2)
+      dataview.setUint8(2, low) //count
+      dataview.setUint8(3, high)
+      dataview.setUint16(4, 0) //time
+      dataview.setUint8(6,sum)
     }
 
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve, reject) => {
       wx.writeBLECharacteristicValue({
         characteristicId: SCAN_PARAMETERS.scan_interface_window,
         deviceId,
         serviceId: SCAN_PARAMETERS.uuid,
         value: buffer,
-        success:(res)=>{
+        success: (res) => {
           console.log('##set mode suc')
           resolve();
         },
-        fail:(err) =>{
+        fail: (err) => {
           console.log(err)
           reject()
         }
