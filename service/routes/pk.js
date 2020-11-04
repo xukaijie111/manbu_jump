@@ -8,13 +8,27 @@ var  {
 var PK = require('../util/pk')
 
 var Util = require('../util/util');
+const { delete } = require('.');
 
 var creatingPk = {};
 var pkRoom = {};
+var timerData = {}
 
-function cancelPkTimer(){
+var limitTime = 15*60*1000;
+function createPkTimer(pkId){
+  if (timerData[pkId]) return;
+  var timer = setTimeout(() => {
+    cancelPkTimer(pkId)
+  }, limitTime);
 
-    
+  timerData[pkId] = timer;
+}
+
+function cancelPkTimer(pkId) {
+  const timerId = timerData[pkId];
+  if (!timerId) return;
+  clearTimeout(timerId)
+  delete timerData[timerId]
 }
 
 function createPk(option,res){
@@ -51,11 +65,10 @@ function createPk(option,res){
 
       var onePk = new PK(condition)
       pkRoom[onePk.pkId] = onePk;
+      createPkTimer(onePk.pkId);
       return res.json({code:0,data:{
         pkId:onePk.pkId
       }})
-      
-
   })
 
 
