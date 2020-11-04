@@ -8,6 +8,9 @@ class API extends baseRequest {
     },
       { apiName: 'userLogin', url: '/users/login', url:"/users/login"},
       {
+        apiName:'saveUserInfo',url:'/users/save_info'
+      },
+      {
         apiName: 'createGame', url: '/game/create_game', showLoading: true, loadContent:'正在配置服务器...',showError:true
       },
       {
@@ -18,6 +21,12 @@ class API extends baseRequest {
       },
       {
         apiName: 'getTodayInfo', url:'/index/get_today_info'
+      },
+
+
+      {
+
+        apiName:'enterPkRoom',url:'/pk/enter_pk',showLoading: true, loadContent: '正在进入房间..',showError:true
       }
     ]
     this.initFuncs();

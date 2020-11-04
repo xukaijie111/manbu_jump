@@ -9,4 +9,10 @@
   </view>
 
   <Keyboard bind:click='clickCallback'/>
+
+  <button 
+  catchtap='addPkRoom'
+  class="add-wrap" hover-class="hover" type="primary" size='mini'>
+    新建
+  </button>
 </view>

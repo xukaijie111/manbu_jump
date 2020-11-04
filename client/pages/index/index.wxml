@@ -18,20 +18,28 @@
 
 <view class="mode-wrap">
       <view class="mode-item-wrap" 
-      catchtap='clickMode'
-      data-index='{{index}}'
       wx:for='{{modeList}}' hover-class="hover">
-          <view class="left">
-                  <image class="icon" src='{{item.url}}' style='background-color:{{item.color}}'></image>
-                  <view class="mode-info-wrap">
-                        <view class="mode-name">{{item.name}}</view>
-                              <view class='gray-1 size-24'>{{item.description}}</view>
-                  </view>
-          </view>  
-           <view class="right">
-                  <image src='/images/arrow.png' class="arrow"></image>
 
-           </view> 
+          <button 
+          data-index='{{index}}'
+          style="width:100%"
+          class="auth-wrap"
+          wx:if='{{!hasUserInfo}}'
+          open-type='getUserInfo' 
+          bindgetuserinfo='getUserInfo'> </button>
+          <view class="mode-item"    catchtap='clickMode'   data-index='{{index}}'>
+                  <view class="left">
+                              <image class="icon" src='{{item.url}}' style='background-color:{{item.color}}'></image>
+                              <view class="mode-info-wrap">
+                                    <view class="mode-name">{{item.name}}</view>
+                                          <view class='gray-1 size-24'>{{item.description}}</view>
+                              </view>
+                  </view>  
+                  <view class="right">
+                              <image src='/images/arrow.png' class="arrow"></image>
+
+                  </view> 
+            </view>
       </view>
 
 </view>

@@ -154,9 +154,8 @@ router.post('/enter_pk',(req,res,next)=>{
   var body = req.body;
   var pkId = body.pkId;
   var userId = body.userId;
-  var deviceInfo = body.deviceInfo;
   var userInfo = body.userInfo;
-  if (!pkId || !userId || !deviceInfo || !userInfo) {
+  if (!pkId || !userId || !userInfo) {
     return res.json({code:-1,messahe:'参数错误'})
   }
 
@@ -173,12 +172,8 @@ router.post('/enter_pk',(req,res,next)=>{
       userId,
       userInfo,
       count:0,
-      deviceInfo
     })
-  }else{
-    userList[index].deviceInfo = deviceInfo;
   }
-
   return res.json({code:0})
 })
 
@@ -279,3 +274,6 @@ router.post('/update_record',(req,res,next)=>{
 
   return res.json({code:0,data:ret})
 })
+
+
+module.exports = router;

@@ -121,7 +121,7 @@ export default class RequestBaseComponent {
 
           if (item.showError && err && err.message && showError) {
             wx.showToast({
-              title: err.errorMsg || '失败',
+              title: err.message || '失败',
               icon: "none",
               duration:2500
             });

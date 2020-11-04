@@ -63,5 +63,5 @@ page{
 .empty{
   font-size: 28rpx;
   color: #ab5555;
-  margin-top: 10rpx;
+ padding: 10rpx 0rpx 20rpx 0rpx;
 }

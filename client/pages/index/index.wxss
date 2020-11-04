@@ -58,14 +58,23 @@ page{
 }
 .mode-item-wrap{
     height: 200rpx;
+    width: 100%;
     margin-bottom: 30rpx;
     background-color: rgba(76, 73, 73, 0.5);
     color: #ffffff;
     border-radius: 16rpx;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    box-sizing: border-box;
     padding: 0rpx 30rpx;
+    position: relative;
+}
+
+.mode-item{
+  width: 100%;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .hover{
@@ -98,4 +107,15 @@ page{
   /* padding: 20rpx 20rpx;
   background-color: gray;
   border-radius: 50%; */
+}
+
+.auth-wrap{
+  position: absolute;
+  background-color: transparent;
+  left: 0rpx;
+  top: 0rpx;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 999;
+  padding: 0rpx !important;
 }

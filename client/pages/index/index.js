@@ -145,6 +145,22 @@ Page({
     })
   },
 
+  getUserInfo(e) {
+    console.log('###e is ',e)
+    const rawData = e.detail.rawData;
+    if (rawData) {
+      var userInfo = JSON.parse(rawData)
+      Storage.userInfo = userInfo
+      API.saveUserInfo({
+        userInfo
+      })
+      this.setData({
+        hasUserInfo:true
+      })
+      this.clickMode(e)
+    }
+  },
+
   onLoad: function () {
     this.clickMode = compThrottled(this._clickMode.bind(this))
 
@@ -158,6 +174,9 @@ Page({
         })
           .then((res) => {
             Storage.userId = res.userId
+            this.setData({
+              hasUserInfo:!!res.userInfo
+            })
             this.getStastic()
           })
       }

@@ -1,4 +1,10 @@
 // pages/pk/index.js
+
+import {
+compThrottled
+} from '../../utils/util'
+import API from '../../request/api';
+import Storage from '../../utils/storage'
 Page({
 
   /**
@@ -38,9 +44,17 @@ Page({
           return
         }
       }
-      wx.redirectTo({
-        url: '/pages/pk-room/index',
+
+      API.enterPkRoom({
+        pkId:this.data.list.join(''),
+        userInfo:Storage.userInfo
       })
+      .then(()=>{
+        wx.redirectTo({
+          url: '/pages/pk-room/index',
+        })
+      })
+   
       
     }
     
@@ -49,11 +63,17 @@ Page({
     })
   },
 
+  _addPkRoom(){
+    wx.navigateTo({
+      url: '/pages/add-pk/index',
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.addPkRoom = compThrottled(this._addPkRoom.bind(this))
   },
 
   /**
