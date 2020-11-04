@@ -8,7 +8,6 @@ var  {
 var PK = require('../util/pk')
 
 var Util = require('../util/util');
-const { delete } = require('.');
 
 var creatingPk = {};
 var pkRoom = {};
