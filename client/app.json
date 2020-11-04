@@ -1,8 +1,8 @@
 {
   "pages": [
-        "pages/index/index",
-        "pages/jump/index",
-
+    "pages/pk/index",
+    "pages/index/index",
+    "pages/jump/index",
     "pages/search-device/index",
     "pages/sport/index",
     "pages/device-list/index",
@@ -10,6 +10,7 @@
     "pages/logs/logs",
     "pages/bind-device/index",
     "pages/ready_jump/index"
+
   ],
   "window": {
     "backgroundTextStyle": "light",

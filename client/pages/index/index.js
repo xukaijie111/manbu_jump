@@ -120,6 +120,13 @@ Page({
         description:'规定次数,突破自己',
         url:'/images/count.png',
         color:'#9fef9f'
+      },
+      {
+        name:'竞技模式',
+        description:'多人线上PK',
+        url:'/images/pk.png',
+        color:'#FF9800',
+        type:'pk'
       }
     ]
   },
@@ -170,9 +177,18 @@ Page({
 
   _clickMode(e){
     const index = e.currentTarget.dataset.index;
-    wx.navigateTo({
-      url: `/pages/ready_jump/index?mode=${index}`,
-    })
+    const item = this.data.modeList[index];
+    if (item.type === 'pk'){
+      wx.navigateTo({
+        url: '/pages/pk/index',
+      })
+    }
+    else{
+      wx.navigateTo({
+        url: `/pages/ready_jump/index?mode=${index}`,
+      })
+    }
+   
 
     // if (!lists.length) {
     //   wx.navigateTo({

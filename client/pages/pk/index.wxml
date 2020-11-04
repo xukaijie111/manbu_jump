@@ -1,0 +1,12 @@
+<!--pages/pk/index.wxml-->
+<view class="wrap">
+
+  <view class="content">
+    <view>请输入竞技号</view>
+    <view class="input-wrap">
+      <view wx:for='123456' class="item">{{list[index]}}</view>
+    </view>
+  </view>
+
+  <Keyboard bind:click='clickCallback'/>
+</view>

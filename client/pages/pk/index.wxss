@@ -1,0 +1,36 @@
+/* pages/pk/index.wxss */
+
+page{
+  height: 100%;
+}
+
+.wrap{
+  height: 100%;
+  background-color: #000000;
+}
+
+.content{
+  padding-top: 100rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 28rpx;
+  color: #ffffff;
+}
+
+.input-wrap{
+  margin-top: 30rpx;
+  width: calc(100% - 100rpx);
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.item{
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 8rpx;
+  background-color: #ffffff;
+}

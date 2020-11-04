@@ -1,0 +1,11 @@
+<!--components/keyboard/index.wxml-->
+<view class='keyboard '>
+  <view class='key_box'>
+            <view class='keys {{index%3==0&&"border0"}} {{(index==9||index==11)&&"bg_color"}}'
+                  wx:for='{{KeyboardKeys}}' wx:key='this' 
+                  catchtap='keyTap' data-keys='{{item}}'
+                  hover-class='hover'
+                  >{{item}}
+            </view>
+        </view>
+    </view>
