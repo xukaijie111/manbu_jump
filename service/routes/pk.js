@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var moment  = require('moment')
 var  {
   pkModel 
 } = require('../db/db')
@@ -10,6 +11,11 @@ var Util = require('../util/util');
 
 var creatingPk = {};
 var pkRoom = {};
+
+function cancelPkTimer(){
+
+    
+}
 
 function createPk(option,res){
   var pkId = Util.generatePkId();
@@ -187,7 +193,7 @@ router.post('/leave_pk',(req,res,next)=>{
   return res.json({code:0})
 })
 
-
+// 更新跳绳数据
 router.post('/update_record',(req,res,next)=>{
   var body = req.body;
   var pkId = body.pkId;
@@ -205,25 +211,59 @@ router.post('/update_record',(req,res,next)=>{
   let userList = pkData.userList;
   let userIds = userList.map((u)=>{return u.userId});
   const index = userIds.indexOf(userId);
-  if (index !== -1 ) {
-    userList[index].count = count
-  }
-  return res.json({code:0})
-})
 
-router.post('/end_pk',(req,res,next)=>{
-
-  var body = req.body;
-  var pkId = body.pkId;
-  var userId = body.userId;
-  if (!pkId || !userId) {
-    return res.json({code:-1,message:'参数错误'})
+  if (index === -1) {
+    return res.json({code:-1,message:'未找到该用户'})
   }
 
-  pkModel.updateOne({gameId},{
-    endTime:new Date()
-  },(err)=>{
-   return res.json({code:0})
-  })
+  /***职位这次竞技结束标志 */
 
+  if (mode === 1) { //时间模式
+    var nowTime = moment();
+    var startTime = moment(pkData.startTime);
+    var maxSeconds = pkData.maxSeconds;
+    let timeDiff = nowTime.diff(startTime, "seconds")
+    if (timeDiff >= maxSeconds) { // 结束了
+      pkData.isEnd = true;
+    }
+  }else if (mode === 2) { //数量模式
+      var maxCount = pkData.maxCount;
+      if (count >= maxCount) {
+        pkData.isEnd = true;
+      }
+  }
+
+  var user = userList[index];
+
+  if (!pkData.isEnd || (pkData.isEnd && !user.isEnd)) {
+    user.count = count;
+    user.isEnd = true
+  }
+
+  var isAllEnd = true;
+  for (var i = 0; i < userList.length;i++) {
+    if (!userList[i].isEnd) {
+      isAllEnd = false;
+      break;
+    }
+  }
+
+  if (isAllEnd) {
+    pkModel.save({pkData})
+  }
+
+
+  var ret = {
+    isEnd:!!pkData.isEnd && !!user.isEnd
+  }
+
+  if (mode === 1) {
+    var nowTime = moment();
+    var startTime = moment(pkData.startTime);
+    var maxSeconds = pkData.maxSeconds;
+    let timeDiff = nowTime.diff(startTime, "seconds")
+    ret.remainSeconds = timeDiff
+  }
+
+  return res.json({code:0,data:ret})
 })
