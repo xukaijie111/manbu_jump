@@ -19,7 +19,6 @@ Component({
    */
   methods: {
     keyTap(e){
-      console.log('#####e is ',e)
       const data = e.currentTarget.dataset.keys;
       this.triggerEvent('click',data)
     }

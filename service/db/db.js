@@ -59,8 +59,41 @@ var gameSchema = new Schema({
 
 var gameModel = mongoose.model('game',gameSchema,'game');
 
+var pKSchema = new Schema({
+  startTime:{type:Date},
+  endTime:{type:Date},
+  pkId:{type:String},
+  ownerId:{type:String}, //创建者userId
+  winerId:{type:String}, //获胜者
+  maxMan:{
+    type:Number,
+    default:10
+  },
+  mode:{  //1时间 2计数跳
+    type:Number,
+    default:1
+  },
+  maxSeconds:{
+    type:Number, //如果是时间跳，则使用到秒
+  },
+  maxCount:{
+    type:Number,
+    default:0 , // 计数跳 设置最大数量
+  },
+  userList:[{
+      userId:{type:String},
+      userInfo:{type:Object},
+      count:{type:Number},
+      deviceInfo:{type:Object},
+  }],
+  
+}, {timestamps: {createdAt: 'created', updatedAt: 'updated'}});
+
+var pkModel = mongoose.model('pk',pKSchema,'pk');
+
 module.exports = {
   userModel,
   deviceModel,
-  gameModel
+  gameModel,
+  pkModel
 }

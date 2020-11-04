@@ -10,6 +10,43 @@ Page({
 
   clickCallback(e) {
     console.log('back is ',e)
+    const data = e.detail;
+    let list = this.data.list;
+    if (typeof data === 'number') {
+      if (list[5] !== '') return ; //已经满了
+      for (var i = 0; i<list.length;i++) {
+        if (list[i] === '') {
+          list[i] = data;
+          break;
+        }
+      }
+    }else if (data === 'del') {
+      for (var j = list.length - 1;j>=0;j--) {
+        if (list[j] !== '') {
+          list[j] = ''
+          break;
+        }
+      }
+    } else if (data === 'OK') {
+      for (var j = list.length - 1;j>=0;j--) {
+        console.log('###',list[j])
+        if (list[j] === '') {
+         wx.showToast({
+           title: '请输入竞技号',
+           icon:'none'
+         })
+          return
+        }
+      }
+      wx.redirectTo({
+        url: '/pages/pk-room/index',
+      })
+      
+    }
+    
+    this.setData({
+      list
+    })
   },
 
   /**

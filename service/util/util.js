@@ -16,6 +16,14 @@ function generateGameId(){
   return gameId;
 }
 
+function generatePkId(){
+  var gameId = "";
+  for(var i = 0; i < 6; ++i){
+    gameId += Math.floor(Math.random()*10);
+  }
+  return gameId;
+}
+
 const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
@@ -31,5 +39,6 @@ function changeDate(seconds) {
 module.exports = {
   generateUserId,
   generateGameId,
+  generatePkId,
   changeDate
 }
