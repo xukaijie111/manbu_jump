@@ -17,6 +17,7 @@ page{
   position: relative;
   padding-bottom: 20rpx;
   margin-bottom: 20rpx;
+  color: #333333;
 }
 
 .title::after{
@@ -39,4 +40,22 @@ page{
   display: flex;
   align-items: center;
   margin-bottom: 20rpx;
+}
+
+.picker{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.arrow{
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.time-wrap{
+  margin-top: 30rpx;
+}
+.count-wrap{
+  margin-top: 30rpx;
 }
