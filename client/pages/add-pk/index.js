@@ -5,7 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    mode:1, // 1时间 2 //计数
+    items: [
+      {value: 1, name: '计时跳',checked:true},
+      {value:2, name: '计数跳',checked:false},
+    ]
   },
 
   /**

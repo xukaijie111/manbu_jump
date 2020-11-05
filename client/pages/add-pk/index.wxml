@@ -1,2 +1,24 @@
 <!--pages/add-pk/index.wxml-->
-<text>pages/add-pk/index.wxml</text>
+
+
+<view class="wrap"> 
+    <view class="item-wrap mode-wrap">
+        <view class="title">选择模式</view>
+
+        <radio-group bindchange="radioChange">
+        <label class="radio-wrap" wx:for="{{items}}" wx:key="{{item.value}}">
+          <view class="radio-item">
+            <radio value="{{item.value}}" checked="{{item.checked}}"/>  
+          </view>
+          <view class="radio-item-text">{{item.name}}</view>
+        </label>
+      </radio-group>
+    </view>
+
+    <view class="time-wrap" wx:if='{{mode === 1}}'></view>
+
+    <view class="count-wrap" wx:if='{{mode === 2}}'></view>
+
+    <view class="max-man"></view>
+
+</view>

@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/add-pk/index",
     "pages/index/index",
     "pages/pk/index",
     "pages/jump/index",
@@ -10,8 +11,8 @@
     "pages/logs/logs",
     "pages/bind-device/index",
     "pages/ready_jump/index",
-    "pages/pk-room/index",
-    "pages/add-pk/index"
+    "pages/pk-room/index"
+ 
   ],
   "window": {
     "backgroundTextStyle": "light",

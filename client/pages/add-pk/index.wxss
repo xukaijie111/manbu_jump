@@ -1,1 +1,42 @@
 /* pages/add-pk/index.wxss */
+page{
+  height: 100%;
+}
+
+.wrap{
+  height: 100%;
+  background-color: #F6F6F6;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 30rpx 30rpx;
+  color: #999999;
+  font-size: 28rpx;
+}
+
+.title{
+  position: relative;
+  padding-bottom: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.title::after{
+  position: absolute;
+  content: '';
+  width: calc(100% - 30rpx);
+  height: 1px;
+  background-color: #f6f6f6;
+  left: 0rpx;
+  bottom: 0rpx;
+}
+
+.item-wrap{
+  background-color: #ffffff;
+  border-radius: 8rpx;
+  padding: 30rpx 30rpx;
+}
+
+.radio-wrap{
+  display: flex;
+  align-items: center;
+  margin-bottom: 20rpx;
+}
