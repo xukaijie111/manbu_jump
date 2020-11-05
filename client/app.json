@@ -1,7 +1,8 @@
 {
   "pages": [
-    "pages/add-pk/index",
     "pages/index/index",
+    "pages/add-pk/index",
+
     "pages/pk/index",
     "pages/jump/index",
     "pages/search-device/index",

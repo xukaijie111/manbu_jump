@@ -1,18 +1,28 @@
 // pages/pk-room/index.js
+
+import API from '../../request/api'
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+  },
 
+  getPkDetail(){
+    API.getPkDetail({
+      pkId:this.data.pkId
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var pkId = options.pkId;
+    this.setData({pkId})
+    this.getPkDetail();
   },
 
   /**

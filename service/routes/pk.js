@@ -121,7 +121,7 @@ router.post('/edit_pk',(req,res,next)=>{
 
 })
 
-router.post('get_pk_detail',(req,res,next)=>{
+router.post('/get_pk_detail',(req,res,next)=>{
   var body = req.body;
   var pkId = body.pkId;
   var userId = body.userId;

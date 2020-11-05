@@ -76,12 +76,12 @@ Page({
     Storage.minute = minute;
   },
 
-  _createPk(e) {
+  _createPk() {
     var data = this.data;
     API.createPk({
       maxMan:data.maxMan,
       mode:data.mode,
-      maxSeconds:data.hour*60*60+minute*60,
+      maxSeconds:data.hour*60*60+data.minute*60,
       maxCount:data.count
     })
     .then((res)=>{

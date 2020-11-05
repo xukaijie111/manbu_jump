@@ -33,9 +33,6 @@ export default class RequestBaseComponent {
         url = url + '?' + object2String(param.query);
         param.url = url;
       }
-      let header = {
-        'content-type': 'application/x-www-form-urlencoded',
-      }
       if (Storage.userId) {
         if (param.data) param.data.userId = Storage.userId
         else{
@@ -48,7 +45,6 @@ export default class RequestBaseComponent {
 
       wx.request({
         ...param,
-        header: header,
         success: (res) => {
           const data = res.data;
           if (data.code === 0) {

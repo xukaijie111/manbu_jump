@@ -26,6 +26,9 @@ class API extends baseRequest {
         apiName:'enterPkRoom',url:'/pk/enter_pk',showLoading: true, loadContent: '正在进入房间..',showError:true
       },{
         apiName:'createPk',url:'/pk/create_pk',showLoading: true, loadContent: '正在创建房间..',showError:true
+      },
+      {
+        apiName:'getPkDetail',url:'/pk/get_pk_detail',showLoading: true
       }
     ]
     this.initFuncs();
