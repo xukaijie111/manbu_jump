@@ -1,3 +1,4 @@
+import moment from '../moment/index'
 export const formatTime = date => {
   const year = date.getFullYear()
   const month = date.getMonth() + 1
@@ -12,6 +13,14 @@ export const formatTime = date => {
 export const formatNumber = n => {
   n = n.toString()
   return n[1] ? n : '0' + n
+}
+
+export function changeDate(seconds) {
+  console.log('###seconds is ',seconds)
+  var data = moment.duration(seconds, 'seconds')
+
+  // 案例：时分秒 00:00:00
+  return [data.hours(), data.minutes(), data.seconds()].map(formatNumber).join(":")
 }
 
 export function throttle(func, wait, options) {

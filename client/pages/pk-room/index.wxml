@@ -1,2 +1,26 @@
 <!--pages/pk-room/index.wxml-->
-<text>pages/pk-room/index.wxml</text>
+<view class="wrap">
+
+  <view class="pk-base-info-wrap">
+    <view class="mode item">模式: {{modeStr}}</view>
+    <view class="time item">时间: {{timeStr}}</view>
+    <view class="count item">个数: {{maxCount}}</view>
+  </view>
+
+  <view class="user-list-wrap" >
+    <view class="man-title">参与人数:</view>
+    <view class="user-item-wrap">
+      <view class="user-item" wx:for='{{userList}}'>
+        <image src='{{item.userInfo.avatarUrl}}' class="header"></image>
+        <view class="nickname">{{item.userInfo.nickName}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="btn-wrap">
+    <view class="tip">未连接设备，请先连接设备>></view>
+    <view class="btn {{deviceInfo?'':'disabled'}}" hover-class="hover" catchtap="enterPk" wx:if='{{!hasEnter}'>参与竞技</view>
+    <view class="btn" hover-class="hover" catchtap="leavePk" wx:if='{{hasEnter}}'>退出竞技</view>
+</view>
+  
+</view>

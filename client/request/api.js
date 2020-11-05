@@ -29,6 +29,11 @@ class API extends baseRequest {
       },
       {
         apiName:'getPkDetail',url:'/pk/get_pk_detail',showLoading: true
+      },
+      {
+        apiName:'enterPk',url:'/pk/enter_pk',
+      },{
+        apiName:'leavePk',url:'/pk/leave_pk'
       }
     ]
     this.initFuncs();

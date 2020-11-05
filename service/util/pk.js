@@ -1,22 +1,15 @@
 
 class PK{
-  constructor({
-    pkId = '',
-    ownerId = '',
-    maxMan = 0,
-    maxSeconds = 0,
-    maxCount = 0,
-    mode = 1,
-  }) {
-    this.pkId = pkId;
+  constructor(param) {
+    this.pkId = param.pkId;
     this.startTime = '';
     this.endTime = '';
-    this.ownerId = ownerId;
+    this.ownerId = param.userId;
     this.winerId = '';
-    this.maxMan = maxMan;
-    this.mode = mode;
-    this.maxSeconds = maxSeconds;
-    this.maxCount = maxCount;
+    this.maxMan = param.maxMan;
+    this.mode = param.mode;
+    this.maxSeconds = param.maxSeconds;
+    this.maxCount = param.maxCount;
     this.userList = [];
     this.createdAt = '';
     this.updatedAt = '';
