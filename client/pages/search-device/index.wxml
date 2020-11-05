@@ -7,6 +7,7 @@
     <view>1、请确保设备开机</view>
     <view>2、请确保设备未被其他终端连接</view>
     <view>3、请确认手机开启蓝牙功能</view>
+    <view>4、安卓系统请打开位置定位</view>
   </view>
 
   <view class="col-sm-2" wx:if='{{!lists.length}}'>
