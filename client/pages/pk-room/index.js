@@ -18,6 +18,12 @@ Page({
     deviceInfo:''
   },
 
+  _connectClick(){
+    wx.navigateTo({
+      url: '/pages/search-device/index?from=pk',
+    })
+  },
+
   _enterPk(){
     if (!this.data.deviceInfo) return;
     this.enterPkRoom()
@@ -86,6 +92,7 @@ Page({
     this.getPkDetail();
     this.enterPk = compThrottled(this._enterPk.bind(this))
     this.leavePk = compThrottled(this._leavePk.bind(this))
+    this.connectClick = compThrottled(this._connectClick.bind(this))
   },
 
   /**

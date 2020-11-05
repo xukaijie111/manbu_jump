@@ -6,7 +6,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    lists:[]
+    lists:[],
+    from:''
   },
 
   /**
@@ -14,6 +15,12 @@ Page({
    */
   onLoad: function (options) {
     const mode = parseInt(options.mode);
+    const from = options.from;
+    if (from === 'pk') {
+      this.setData({
+        from:'pk'
+      })
+    }
     this.setData({mode})
   },
 
@@ -42,9 +49,16 @@ Page({
     Ble.connectDevice(deviceId)
     .then(()=>{
       wx.hideLoading()
-      wx.redirectTo({
-        url: `/pages/jump/index?mode=${this.data.mode}&deviceId=${deviceId}`,
-      })
+      if (this.data.from === 'pk') {
+        wx.navigateBack({
+          belta:1
+        })
+      }else{
+        wx.redirectTo({
+          url: `/pages/jump/index?mode=${this.data.mode}&deviceId=${deviceId}`,
+        })
+      }
+    
     },()=>{
       wx.hideLoading()
       wx.showToast({
