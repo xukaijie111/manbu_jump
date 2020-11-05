@@ -1,37 +1,18 @@
-// pages/user/index.js
-
-import {
-  compThrottled
-} from '../../utils/util.js'
+// pages/my-list/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    
-  },
 
-  
-
-  _clickMyDevice(){
-    wx.navigateTo({
-      url: '/pages/device-list/index',
-    })
-  },
-
-  _clickMyList(){
-    wx.navigateTo({
-      url: '/pages/my-list/index',
-    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.clickMyDevice = compThrottled(this._clickMyDevice.bind(this))
-    this.clickMyList = compThrottled(this._clickMyList.bind(this))
+
   },
 
   /**

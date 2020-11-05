@@ -3,6 +3,7 @@
 import API from '../../request/api'
 import Storage from '../../utils/storage'
 import moment from '../../moment/index'
+import Ble from '../../utils/ble'
 
 import {
   changeDate,
@@ -82,6 +83,17 @@ Page({
   },
 
 
+  getDeviceInfo(){
+    if (Ble.lists.length) {
+      this.setData({
+        deviceInfo:Ble.lists[0]
+      })
+    }else{
+      this.setData({
+       deviceInfo:''
+      })
+    }
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -93,6 +105,7 @@ Page({
     this.enterPk = compThrottled(this._enterPk.bind(this))
     this.leavePk = compThrottled(this._leavePk.bind(this))
     this.connectClick = compThrottled(this._connectClick.bind(this))
+  
   },
 
   /**
@@ -106,7 +119,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getDeviceInfo();
   },
 
   /**

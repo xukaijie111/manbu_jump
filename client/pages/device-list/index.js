@@ -1,9 +1,5 @@
 // pages/device-list/index.js
-import { BATTER_SERVICE, HUMAN_INERFACE_DEVICE_SERVICE,
-  SCAN_PARAMETERS
- } from '../../utils/const.js'
-
- import API from '../../request/api.js'
+import Ble from '../../utils/ble'
 
  import {
   compThrottled
@@ -26,14 +22,13 @@ Page({
 
   _bindDevice(){
     wx.navigateTo({
-      url: '/pages/bind-device/index',
+      url: '/pages/search-device/index?from=user',
     })
   },
 
   getdeviceList(){
-    API.getMyDeviceList()
-    .then((res)=>{
-      console.log('##3get device list is ',res)
+    this.setData({
+      lists:Ble.lists
     })
   },
 

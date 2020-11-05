@@ -10,8 +10,8 @@
 
 <view class="empty-wrap">
   <image src='/images/empty.png' class="empty"></image>
-  <view style='margin:10rpx 0rpx'>还没有绑定设备哦~</view>
-  <button type='primary' catchtap="bindDevice">去绑定</button>
+  <view style='margin:10rpx 0rpx'>还没有连接设备哦~</view>
+  <button type='primary' catchtap="bindDevice">去连接</button>
 </view>
 
 </view>

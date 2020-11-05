@@ -102,6 +102,7 @@ Page({
   },
 
   endGame(){
+    if (this.data.status !== STATUS_DOING) return
     API.endGame({
       gameId:this.data.gameId
     });
@@ -143,7 +144,7 @@ Page({
 
     Ble.sendMode(deviceId, mode, option)
       .then(() => {
-        
+        this.clickStart();
       }, () => {
         wx.showModal({
           title: '提示',
@@ -190,5 +191,6 @@ Page({
   },
   onUnload(){
     this.destroyTimer();
+    this.endGame();
   }
 })

@@ -24,8 +24,8 @@ router.post('/get_today_info',(req,res,next)=>{
 
   let startTime = new Date(moment().format('YYYY-MM-DD'));
   let endTime = new Date(moment().add(1, 'days').format('YYYY-MM-DD'));
-  console.log('###startime',startTime,endTime)
-  gameModel.find({ $and: [{userId},{ startTime: { $gt: startTime } }, { endTime: { $lt: endTime } }] }) //实现第一种情况
+  console.log('###startime',startTime,endTime,(startTime).toISOString(),(endTime).toISOString())
+  gameModel.find({ $and: [{userId},{ startTime: { $gt: (startTime).toISOString() } }, { endTime: { $lt: (endTime).toISOString() } }] }) //实现第一种情况
   .select("-_id count ka endTime startTime")
   .exec((err,list)=>{
     console.log('####err',list)

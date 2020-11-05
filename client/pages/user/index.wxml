@@ -9,17 +9,17 @@
 
     <view class='content-wrap'>
           <cell 
-            title='我的设备'
+            title='已连接设备'
             isLink
             catch:click='clickMyDevice'
             custom-class='item-custom-class'
           />
 
-            <cell 
-                       custom-class='item-custom-class'
-            title='新增设备'
+          <cell 
+            title='历史记录'
             isLink
-            catch:click='clickaddDevice'
+            catch:click='clickMyList'
+            custom-class='item-custom-class'
           />
     </view>
 </view>

@@ -54,7 +54,7 @@
 
     </view>
 
-    <view class="btn-group">
+    <!-- <view class="btn-group">
         <block wx:if='{{status === 0}}'>
             <view class="flex-column start-wrap">
               <image src='/images/start.png' class="start-img"  catchtap='clickStart' hover-class='hover'></image>
@@ -70,7 +70,7 @@
         <block wx:if='{{status === 2}}'></block>
 
         <block wx:if='{{status === 3}}'></block>
-    </view>
+    </view> -->
 
     <view class="gift-wrap">
       <image src='/images/jump.gif' class="gift"></image>

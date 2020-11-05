@@ -49,7 +49,8 @@ Page({
     Ble.connectDevice(deviceId)
     .then(()=>{
       wx.hideLoading()
-      if (this.data.from === 'pk') {
+      const from = this.data.from;
+      if (from === 'pk' || from === 'user') {
         wx.navigateBack({
           belta:1
         })
