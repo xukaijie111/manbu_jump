@@ -22,11 +22,10 @@ class API extends baseRequest {
       {
         apiName: 'getTodayInfo', url:'/index/get_today_info'
       },
-
-
       {
-
         apiName:'enterPkRoom',url:'/pk/enter_pk',showLoading: true, loadContent: '正在进入房间..',showError:true
+      },{
+        apiName:'createPk',url:'/pk/create_pk',showLoading: true, loadContent: '正在创建房间..',showError:true
       }
     ]
     this.initFuncs();

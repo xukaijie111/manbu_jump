@@ -2,7 +2,7 @@
 
 
 <view class="wrap"> 
-    <view class="item-wrap mode-wrap">
+    <!-- <view class="item-wrap mode-wrap">
       <view class="title">选择模式</view>
 
       <radio-group bindchange="radioChange">
@@ -38,10 +38,26 @@
         
       </view>
 
-    </view>
+    </view> -->
 
   
 
-    <view class="max-man"></view>
+    <!-- <view class="max-man item-wrap">
+      <view class="title">最多人数</view>
+      <picker bindchange="bindManPickerChange" value="{{index}}" range="{{manArray}}">
+        <view class="picker">
+          <view>
+            {{maxMan}}个
+          </view>
+          <image src='/images/arrow2.png' class="arrow"></image>
 
+        </view>
+      </picker>
+    </view> -->
+
+
+    <view class="btn-wrap">
+
+        <view class="btn" hover-class="hover" catchtap="createPk">创建</view>
+    </view>
 </view>
