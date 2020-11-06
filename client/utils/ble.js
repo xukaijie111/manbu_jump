@@ -3,6 +3,9 @@ import {
   SCAN_PARAMETERS
 } from './const.js'
 
+const system = wx.getSystemInfoSync();
+const isPhone = system.platform === 'ios'
+
 class Ble {
   constructor() {
     this.isStart = false;
@@ -79,6 +82,7 @@ class Ble {
   openAdapter() {
     return new Promise((resolve, reject) => {
       wx.openBluetoothAdapter({
+        mode:'central',
         success: function (res) {
           console.log('###open adapter suc')
           resolve()
@@ -157,6 +161,12 @@ class Ble {
               return true;
             }
           })
+
+          if (isPhone) {
+            lists.forEach((l)=>{
+              l.name = l.name || "MS1793 JUMP"
+            })
+          }
 
           self.lists = self.lists.concat(lists)
         }
@@ -268,6 +278,60 @@ class Ble {
 
 
   }
+
+  getDeviceServices(deviceId){
+    return new Promise((resolve,reject)=>{
+      wx.getBLEDeviceServices({
+        deviceId,
+        success:(res)=>{
+          console.log('###get services is ',res)
+          resolve()
+        },
+        fail:(err)=>{
+          console.log('get service error is ',err)
+          reject()
+        }
+      })
+    })
+  }
+
+  getCharacters(deviceId){
+    return new Promise((resolve,reject)=>{
+      wx.getBLEDeviceCharacteristics({
+        deviceId,
+        serviceId: SCAN_PARAMETERS.uuid,
+        success:(res)=>{
+          console.log('###get character is ',res)
+          resolve()
+        },
+        fail:(err)=>{
+          console.log('get charect error is ',err)
+          reject()
+        }
+      })
+    })
+  }
+
+  // wx.getBLEDeviceServices({
+      //   deviceId,
+      //   success:(res)=>{
+      //     console.log('##get service is ',res)
+      //     wx.getBLEDeviceCharacteristics({
+      //       deviceId,
+      //       serviceId:'00001813-0000-1000-8000-00805F9B34FB',
+      //       success:(res)=>{
+      //         console.log('##get chara is ',res)
+      //       },
+      //       fail:(err) =>{
+      //         console.log('##get character fail is ',err)
+      //       }
+      //     })
+      //   },
+      //   fail:(err) =>{
+      //     console.log('##get character fail is ',err)
+      //   }
+      // })
+
 
 }
 

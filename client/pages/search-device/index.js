@@ -47,18 +47,29 @@ Page({
       title: '连接中...',
     })
     Ble.connectDevice(deviceId)
-    .then(()=>{
+    .then(async ()=>{
       wx.hideLoading()
-      const from = this.data.from;
-      if (from === 'pk' || from === 'user') {
-        wx.navigateBack({
-          belta:1
-        })
-      }else{
-        wx.redirectTo({
-          url: `/pages/jump/index?mode=${this.data.mode}&deviceId=${deviceId}`,
+
+      try{
+        await Ble.getDeviceServices(deviceId)
+        await Ble.getCharacters(deviceId)
+        // return;
+        const from = this.data.from;
+        if (from === 'pk' || from === 'user') {
+          wx.navigateBack({
+            belta:1
+          })
+        }else{
+          wx.redirectTo({
+            url: `/pages/jump/index?mode=${this.data.mode}&deviceId=${deviceId}`,
+          })
+        }
+      }catch(err) {
+        wx.showToast({
+          title: '连接失败哦',
         })
       }
+     
     
     },()=>{
       wx.hideLoading()
