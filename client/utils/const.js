@@ -1,6 +1,6 @@
 
 
-export const BASEAPIURL = 'https://www.ccnet.site'
+export const BASEAPIURL = 'https://www.manbu.fun'
 
 
 

@@ -3,7 +3,7 @@ let config = require('../config').config
 
 let mongoose = require("mongoose");
 // mongoose.connect('mongodb://'+config.DBHOST+'/'+config.DBNAME);
-var url = `mongodb://${config.DBUSERNAME}:${config.DBPWD}@${config.DBHOST}:${config.DBPORT}/${config.DBNAME}`
+var url = `mongodb://${config.DBHOST}:${config.DBPORT}/${config.DBNAME}`
 console.log('###connect url is ',url)
 mongoose.connect(url, {auto_reconnect: true});
 var db = mongoose.connection;
