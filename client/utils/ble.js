@@ -223,7 +223,7 @@ class Ble {
     var buffer = new ArrayBuffer(7);
     var dataview = new DataView(buffer)
     dataview.setUint8(0, 0xf3)
-    if (mode === 0) {
+    if (mode === 0) { // 自由
       dataview.setUint8(1, 0)
       dataview.setUint16(2, 0)
       dataview.setUint16(4, 0)

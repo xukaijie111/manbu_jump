@@ -38,6 +38,7 @@ Page({
   },
 
   updateToServer(){
+
    // count++;
     if (!this.data.gameId) return
     const count = this.data.nowCount;
@@ -102,7 +103,7 @@ Page({
   },
 
   endGame(){
-    if (this.data.status !== STATUS_DOING) return
+    //if (this.data.status !== STATUS_DOING) return
     API.endGame({
       gameId:this.data.gameId
     });
@@ -117,6 +118,7 @@ Page({
       mode:this.data.mode,
     })
     .then((res)=>{
+      console.log('####create game is',res)
       this.sendCmd();
       this.setData({
         status:STATUS_DOING
@@ -126,14 +128,13 @@ Page({
         gameId
       })
       //this.setBleMode();
-    },()=>{
-      this.setBleMode();
     })
   },
 
   setBleMode(){
     let mode = this.data.mode;
     const deviceId  = this.data.deviceId;
+    const { hour,minute,count} = this.data;
     var option = {};
     if (mode === 1) {
       option.hour = hour;
