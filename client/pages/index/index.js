@@ -107,17 +107,21 @@ Page({
         name:'自由跳',
         description:'畅享自由玩',
         url:'/images/free.png',
-        color:'#f14545'
-      },{
-        name:'计时跳',
-        description:'设置时间,挑战自己',
-        url:'/images/time.png',
-        color:'#f3f35d'
+        color:'#f14545',
+        mode:0,
       },{
         name:'计数跳',
         description:'规定次数,突破自己',
         url:'/images/count.png',
-        color:'#9fef9f'
+        color:'#9fef9f',
+        mode:1
+      }
+      ,{
+        name:'计时跳',
+        description:'设置时间,挑战自己',
+        url:'/images/time.png',
+        color:'#f3f35d',
+        mode:2
       },
       {
         name:'竞技模式',
@@ -195,6 +199,7 @@ Page({
   _clickMode(e){
     const index = e.currentTarget.dataset.index;
     const item = this.data.modeList[index];
+    const mode = item.mode;
     if (item.type === 'pk'){
       wx.navigateTo({
         url: '/pages/pk/index',
@@ -202,7 +207,7 @@ Page({
     }
     else{
       wx.navigateTo({
-        url: `/pages/ready_jump/index?mode=${index}`,
+        url: `/pages/ready_jump/index?mode=${mode}`,
       })
     }
    

@@ -228,7 +228,18 @@ class Ble {
       dataview.setUint16(2, 0)
       dataview.setUint16(4, 0)
       dataview.setUint8(6, 0xf3)
-    } else if (mode === 1) { //时间跳
+    } else if (mode === 1) { //倒计数
+      var count = options.count;
+      let low = count & 0xff;
+      let high = count >> 8;
+
+      let sum = (0xf3 + 1 + count) & 0xff
+      dataview.setUint8(1, 1)
+      dataview.setUint8(2, low) //count
+      dataview.setUint8(3, high)
+      dataview.setUint16(4, 0) //time
+      dataview.setUint8(6,sum)
+    } else if (mode === 2) { // 倒计时
       var hour = parseInt(options.hour);
       var minute = parseInt(options.minute);
       var seconds = hour * 60 * 60 + minute * 60;
@@ -238,24 +249,15 @@ class Ble {
 
 
       console.log('###high low is ', high, low)
-      let sum = (0xf3+1+seconds) & 0xff
-      dataview.setUint8(1, 1)
+      let sum = (0xf3+2+seconds) & 0xff
+      console.log('###sum is ',sum);
+      dataview.setUint8(1, 2)
       dataview.setUint16(2, 0) // count
 
       dataview.setUint8(4, low) //time
       dataview.setUint8(5, high)
       dataview.setUint8(6, sum)
-    } else if (mode === 2) { // 计数跳
-      var count = options.count;
-      let low = count & 0xff;
-      let high = count >> 8;
-
-      let sum = (0xf3 + 2 + count) & 0xff
-      dataview.setUint8(1, 2)
-      dataview.setUint8(2, low) //count
-      dataview.setUint8(3, high)
-      dataview.setUint16(4, 0) //time
-      dataview.setUint8(6,sum)
+     
     }
 
     return new Promise((resolve, reject) => {

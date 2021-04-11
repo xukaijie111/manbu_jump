@@ -60,27 +60,29 @@ Page({
   updateViewData(value){
     const mode = this.data.mode;
     const timeStr = this.changeDate(value.time);
-    this.setData({
-      nowCount:value.count
-    })
+    let nowCount = 0;
+  
     switch(mode) {
-      case 0:
+      case 0: //自由跳
         let freeData = this.data.freeData;
-        freeData.count = value.count;
+        nowCount = freeData.count = value.count;
         freeData.timeStr = timeStr
-        this.setData({freeData})
+        this.setData({freeData,nowCount})
         break;
-      case 1:
+      case 1:  // 计数跳
+      let countData = this.data.freeData;
+      countData.count = value.count;
+      countData.timeStr = timeStr;
+      nowCount = Math.abs(value.count - this.data.count)
+      this.setData({ countData,nowCount })
+        break;
+      case 2: //计时跳
+
         let timeData = this.data.freeData;
         timeData.count = value.count;
         timeData.timeStr = timeStr
         this.setData({ timeData })
-        break;
-      case 2:
-        let countData = this.data.freeData;
-        countData.count = value.count;
-        countData.timeStr = timeStr
-        this.setData({ countData })
+     
          break;
     }
   },
@@ -137,12 +139,12 @@ Page({
     const { hour,minute,count} = this.data;
     var option = {};
     if (mode === 1) {
+      option.count = count
+    
+    } else if (mode === 2) {
       option.hour = hour;
       option.minute = minute;
-    } else if (mode === 2) {
-      option.count = count
     }
-
     Ble.sendMode(deviceId, mode, option)
       .then(() => {
         this.clickStart();

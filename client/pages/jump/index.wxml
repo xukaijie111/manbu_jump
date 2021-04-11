@@ -1,7 +1,7 @@
 
 <view class="wrap">
     <view class="content">
-    <view class="time-wrap" wx:if='{{mode === 1}}'>
+    <view class="time-wrap" wx:if='{{mode === 2}}'>
         <view class="time">
             <view >{{timeData.timeStr}}</view>
             <view class="gray-1 size-24">时:分:秒</view>
@@ -18,7 +18,7 @@
         </view>
     </view>
 
-    <view class="time-wrap" wx:if='{{mode === 2}}'>
+    <view class="time-wrap" wx:if='{{mode === 1}}'>
         <view class="time">
             <view >{{countData.count}}</view>
             <view class="gray-1 size-24">个</view>
